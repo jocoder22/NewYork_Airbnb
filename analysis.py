@@ -7,6 +7,8 @@ import re
 
 mydir = r"D:\project1"
 
+sp = {"sep":"\n\n", "end":"\n\n"}
+
 def des(*datas):
     for data in datas:
         name = [x for x in globals() if globals()[x] is data][0]
@@ -57,7 +59,7 @@ for i, v in enumerate(datt):
         if vt == True:
             lls.append(v.notnull().all().index[t])
     
-sp = {"sep":"\n\n", "end":"\n\n"}
+
 
 print("\n\n")
 dfm = Dlistings[lls]
