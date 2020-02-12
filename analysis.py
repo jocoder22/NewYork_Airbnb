@@ -116,3 +116,9 @@ newlist = ['id', 'name', 'city', 'latitude', 'longitude',
        'calculated_host_listings_count_entire_homes',
        'calculated_host_listings_count_private_rooms',
        'calculated_host_listings_count_shared_rooms', 'reviews_per_month']
+
+
+dtt = "float64 int64 object".split()
+datt = "DRF DRI DRO".split()
+
+Dlistings = pandas_pickle.loc[:, newlist]
