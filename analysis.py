@@ -122,3 +122,9 @@ dtt = "float64 int64 object".split()
 datt = "DRF DRI DRO".split()
 
 Dlistings = pandas_pickle.loc[:, newlist]
+
+
+print(Dlistings.dropna( axis=0).shape, **sp)
+
+nyc = ['NY','ny', 'Ny', 'New York']
+print(Dlistings[Dlistings["state"] == "NY"].shape)
