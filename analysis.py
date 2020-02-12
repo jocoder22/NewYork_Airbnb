@@ -94,13 +94,13 @@ pd.to_pickle(Listings, os.path.join(mydir, "Listings.pkl"))
 """
 # import pickle file
 pandas_pickle = pd.read_pickle(os.path.join(mydir, "Dlistings.pkl"))
-print(pandas_pickle.head())
+print(pandas_pickle.head(), pandas_pickle.shape, **sp)
 
 
 newlist = ['id', 'name', 'city', 'latitude', 'longitude',
        'is_location_exact', 'property_type', 'room_type', 'accommodates',
        'bathrooms', 'bedrooms', 'beds', 'bed_type', 'amenities',
-       'price', 'security_deposit', "state",
+       'price', 'security_deposit', "state", "street", "neighborhood",
        'cleaning_fee', 'guests_included', 'extra_people', 'minimum_nights',
        'maximum_nights', 'minimum_minimum_nights', 'maximum_minimum_nights',
        'minimum_maximum_nights', 'maximum_maximum_nights',
@@ -129,4 +129,7 @@ Dlistings = pandas_pickle.loc[:, newlist]
 print(Dlistings.dropna( axis=0).shape, **sp)
 
 nyc = ['NY','ny', 'Ny', 'New York']
-print(Dlistings[Dlistings["state"] == "NY"].shape)
+cat = ["room_type", "cancellation_policy"]
+mm = ['is_location_exact', 'room_type', 'bed_type', 'calendar_last_scraped', 'instant_bookable', 
+      'cancellation_policy', 'require_guest_profile_picture', 'require_guest_phone_verification']
+print(Dlistings[Dlistings["state"] == "NY"].shape, len(Dlistings.cancellation_policy.unique()), **sp)
