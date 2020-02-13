@@ -136,3 +136,5 @@ print(Dlistings[Dlistings["state"] == "NY"].shape, len(Dlistings.cancellation_po
 
 for memb in mm:
     print(Dlistings[memb].unique())
+    
+Dlistings["price2"] = Dlistings['price'].replace('[\$,]','', regex=True).astype(float)
