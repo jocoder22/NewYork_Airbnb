@@ -138,3 +138,6 @@ for memb in mm:
     print(Dlistings[memb].unique())
     
 Dlistings["price2"] = Dlistings['price'].replace('[\$,]','', regex=True).astype(float)
+
+for memb in mm:
+    print(Dlistings.groupby(memb)["price2"].mean())
