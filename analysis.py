@@ -133,3 +133,6 @@ cat = ["room_type", "cancellation_policy"]
 mm = ['is_location_exact', 'room_type', 'bed_type', 'calendar_last_scraped', 'instant_bookable', 
       'cancellation_policy', 'require_guest_profile_picture', 'require_guest_phone_verification']
 print(Dlistings[Dlistings["state"] == "NY"].shape, len(Dlistings.cancellation_policy.unique()), **sp)
+
+for memb in mm:
+    print(Dlistings[memb].unique())
