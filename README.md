@@ -9,6 +9,7 @@ Writing a Data Scientist Blog Post
 ## Question I
 ## Question II
  [Google documentation](https://developers.google.com/identity/protocols/OAuth2)
+ 
  run http://www.jocoder22.com/medication 
  - use http://www.jocoder22.com/medication/category/JSON 
 ## Question III
