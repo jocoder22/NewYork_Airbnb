@@ -11,10 +11,16 @@ Writing a Data Scientist Blog Post
     - `Flask`
     - `SQLAlchemy`
 ## Question I
+### where are the Airbnb rrooms in New York
 ## Question II
+### where is the cheapest, most affordable best Airbnb rooms in New York
  [Google documentation](https://developers.google.com/identity/protocols/OAuth2)
 
  run http://www.jocoder22.com/medication 
  - use http://www.jocoder22.com/medication/category/JSON 
 ## Question III
+### what is the most popular and affordable Airbnb rooms in each New York borough
+## Question IV
+### what are the major determinants of prices of rooms in New York Airbnb 
 ## Conclusion
+

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import re
-
+from collections import defaultdict
 
 mydir = r"D:\project1"
 
@@ -19,6 +19,10 @@ def mmshape(*datat):
     for data in datat:
         name = [x for x in globals() if globals()[x] is data][0]
         print(f"{name} has dimension : {data.shape}", sep="\n\n")
+        
+def print2(*args):
+    for arg in args:
+        print(arg, end="\n\n")
         
 # ww = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/visualisations/listings.csv"
 # ww2 = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/visualisations/reviews.csv"
@@ -95,7 +99,15 @@ pd.to_pickle(Listings, os.path.join(mydir, "Listings.pkl"))
 # import pickle file
 pandas_pickle = pd.read_pickle(os.path.join(mydir, "Dlistings.pkl"))
 print(pandas_pickle.head(), pandas_pickle.shape, **sp)
+nycode = pd.read_pickle(os.path.join(mydir, "nyzipcode.pkl"))
+nycode["zip"] = nycode["zip"].astype(object)
+pandas_pickle.dropna(subset=['zipcode'], inplace=True)
+pandas_pickle["zipcode"] = pandas_pickle["zipcode"].astype(object)
 
+
+nydict = defaultdict(list)
+for i, row in nycode.loc[:, ["zip", "county"]].iterrows():
+    nydict[row.values[1]].append(str(row.values[0]))  
 
 newlist = ['id', 'name', 'city', 'latitude', 'longitude',
        'is_location_exact', 'property_type', 'room_type', 'accommodates',
@@ -103,7 +115,7 @@ newlist = ['id', 'name', 'city', 'latitude', 'longitude',
        'price', 'security_deposit', "state", "street", "neighborhood",
        'cleaning_fee', 'guests_included', 'extra_people', 'minimum_nights',
        'maximum_nights', 'minimum_minimum_nights', 'maximum_minimum_nights',
-       'minimum_maximum_nights', 'maximum_maximum_nights',
+       'minimum_maximum_nights', 'maximum_maximum_nights', 'zipcode',
        'minimum_nights_avg_ntm', 'maximum_nights_avg_ntm', 'calendar_updated',
        'has_availability', 'availability_30', 'availability_60',
        'availability_90', 'availability_365', 'calendar_last_scraped',
@@ -119,6 +131,10 @@ newlist = ['id', 'name', 'city', 'latitude', 'longitude',
        'calculated_host_listings_count_private_rooms',
        'calculated_host_listings_count_shared_rooms', 'reviews_per_month']
 
+list2 = ['id', 'name', 'city', 'latitude', 'longitude',
+       'is_location_exact', 'property_type', 'room_type', 
+       'bathrooms', 'bedrooms', 'price',  "street", "neighborhood",
+       'cleaning_fee', 'guests_included',  'zipcode', 'Newcity']
 
 dtt = "float64 int64 object".split()
 datt = "DRF DRI DRO".split()
@@ -130,7 +146,7 @@ print(Dlistings.dropna( axis=0).shape, **sp)
 
 nyc = ['NY','ny', 'Ny', 'New York']
 cat = ["room_type", "cancellation_policy"]
-mm = ['is_location_exact', 'room_type', 'bed_type', 'calendar_last_scraped', 'instant_bookable', 
+mm = ['is_location_exact', 'room_type', 'bed_type', 'calendar_last_scraped', 'instant_bookable', 'city',
       'cancellation_policy', 'require_guest_profile_picture', 'require_guest_phone_verification']
 print(Dlistings[Dlistings["state"] == "NY"].shape, len(Dlistings.cancellation_policy.unique()), **sp)
 
@@ -140,4 +156,25 @@ for memb in mm:
 Dlistings["price2"] = Dlistings['price'].replace('[\$,]','', regex=True).astype(float)
 
 for memb in mm:
-    print(Dlistings.groupby(memb)["price2"].mean())
+    print(Dlistings.groupby(memb)["price2"].mean().sort_values(ascending=True))
+    
+def assing(a):
+    # for i in a:
+    for key in nydict:
+        if a in nydict[key]:
+            # print(f"{i} is the zipcode in {key}\n")
+            
+            return key
+            
+print2(pandas_pickle.zipcode.head(), pandas_pickle.loc[:, list2].info(), nycode.info(), nycode.head())
+pandas_pickle["Newcity"] = pandas_pickle.apply(lambda row : assing(row["zipcode"]),  axis = 1)
+pandas_pickle["price2"] = pandas_pickle['price'].replace('[\$,]','', regex=True).astype(float)
+print2(pandas_pickle.Newcity.unique(), nycode.head())
+print2(pandas_pickle.groupby("Newcity")["price2"].mean().sort_values(ascending=True))
+print2(pandas_pickle.loc[:, list2].info(), nycode.info(), nycode.head())
+
+pp = pandas_pickle[pandas_pickle.Newcity.isnull()].zipcode
+
+newcode = pp.str.split(' - ')
+
+print2(newcode)
