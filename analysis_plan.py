@@ -6,7 +6,7 @@
             Data Science Nanodegree
                   Udacity
                   
-1. Formulate research/analysis question
+1. Formulate research/analysis question(s)
 2. Seek for relevant datasets
 3. Download relevant datasets
 4. Clean datasets
@@ -15,7 +15,7 @@
 7. Data visualization
 8. Supervised learning
 9. Summary report
-10. Conclusions
+10. Conclusion(s)
 
 
 
