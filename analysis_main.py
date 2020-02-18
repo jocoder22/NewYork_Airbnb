@@ -4,6 +4,9 @@ import numpy as np
 import pandas as pd
 import pickle
 from collections import defaultdict
+import matplotlib.pyplot as plt
+
+plt.style.use('ggplot')
 
 # Define paths, functions and variables
 mydir = r"D:\project1"
@@ -25,10 +28,14 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 #           Our dataset comes for publicly available  Airbnb and New York State Department of Health form their websites
 #     2. Download relevant datasets
 #           Download in the datasets from Airbnb and unitedstateszipcodes.org websites
+#   Airbnb websit: "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
+#   New York State Department of Health:  "https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm"
+
 airbnb = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
-uszp = "https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm"
 listings = pd.read_csv(airbnb)
-zipcodes = pd.read_csv(uszp)
+
+
+
 
 # C. Data preparation
 #     1. Clean datasets
