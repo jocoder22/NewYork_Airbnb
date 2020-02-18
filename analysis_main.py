@@ -34,6 +34,9 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 airbnb = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
 listings = pd.read_csv(airbnb)
 
+# Save data to local disk 
+# save as pickle file
+pd.to_pickle(Dlistings, os.path.join(airbnb, "airbnb_ny.pkl"))
 
 
 
