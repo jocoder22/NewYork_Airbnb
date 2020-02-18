@@ -22,11 +22,11 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 
 # B. Data Understanding
 #     1. Seek for relevant datasets
-#           Our dataset comes for publicly available  Airbnb and unitedstateszipcodes.org form their websites
+#           Our dataset comes for publicly available  Airbnb and New York State Department of Health form their websites
 #     2. Download relevant datasets
 #           Download in the datasets from Airbnb and unitedstateszipcodes.org websites
 airbnb = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
-uszp = "https://www.unitedstateszipcodes.org/zip_code_database.csv?download_auth=3b54c0c5134f0b49e7512b2140749642"
+uszp = "https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm"
 listings = pd.read_csv(airbnb)
 zipcodes = pd.read_csv(uszp)
 
