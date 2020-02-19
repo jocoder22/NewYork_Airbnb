@@ -88,8 +88,5 @@ for i, v in enumerate(features_dtypes):
     print(f'There {len(colnames)} {v} features')
     
 
-# print(working_data.head(), end="\n\n")
-
-# print(float_features, int_features,  cat_features, sep="\n\n")
-
-# print(ny_data.info(), working_data.info(), features_dtypes)
+# clean zipcode and chang it to integer
+working_data["zipcode"] = working_data['zipcode'].str.extract(r'(\d+)', expand=False).astype(int)  
