@@ -6,7 +6,9 @@ import pickle
 from collections import defaultdict
 import matplotlib.pyplot as plt
 
-plt.style.use('ggplot')
+# plt.style.use('ggplot')
+# plt.style.use(['classic'])
+plt.style.use(['dark_background'])
 
 # Define paths, functions and variables
 mydir = r"D:\project1"
@@ -117,21 +119,96 @@ Queens = [11361, 11362, 11363, 11364, 11354, 11355, 11356, 11357, 11358, 11359, 
 	11414, 11415, 11416, 11417, 11418, 11419, 11420, 11421,11368, 11369, 11370, 11372, 11373, 11377, 11378, 11109]
 Staten_Island = [10302, 10303, 10310, 10306, 10307, 10308, 10309, 10312, 10301, 10304, 10305, 10314]
 
+zipdict = {"Queens":Queens, "Staten_Island":Staten_Island, "Manhattan":Manhattan,
+            "Bronx":Bronx, "Brooklyn":Brooklyn}
+
+
+def createborough(zipcode, dict):
+    """The createborough function returns the borough with give zipcode
+
+    Args: 
+        dict (dict): Dictionary with keys and values for search
+        zipcode (int): Five digits zipcode
+
+    Returns: 
+        string: name of borough     
+
+    """
+    for key, val in dict.items():
+        if zipcode in val:
+            return key
+    
+# extract Boroughs based on zipcode
+working_data["Boroughs"] = working_data["zipcode"].apply(createborough, args=[zipdict])
+
+# Get listing percentage for each New York Borough
+ddf = working_data["Boroughs"].value_counts(normalize=True) * 100
+
+
+# Plot the Airbnb listing in New York
+plt.bar( ddf.index, ddf.values)
+plt.xlabel("New York Boroughs")
+plt.ylabel("Percentage of Listings")
+plt.title("Airbnb Listing in New York")
+plt.show()
+
+
+# get the room types percentages
+roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
+
+# # plot the room types
+plt.bar(roomtypes.index, roomtypes.values)
+plt.xlabel("Room Type")
+plt.ylabel("Percentage of Total")
+plt.title("Airbnb Listing in New York")
+plt.show()
+
+
+
+
+
+
 
 print(sorted(Queens), set(Queens).intersection(Staten_Island, Manhattan, Bronx, Brooklyn), sep='\n\n')
-print(working_data.loc[:,["zipcode"]].head())  
+print(working_data.loc[:,["Boroughs"]].head())
 
-mak = [Queens, Staten_Island, Manhattan, Bronx, Brooklyn]
-def ranger(x):
-    maxx = max(x)
-    minn = min(x)
-    print(f"maximium {maxx}, minimium {minn}")
-    
-for elem in mak:
-    ranger(elem)
-    
-# maximium 11697, minimium 11004
-# maximium 10314, minimium 10301
-# maximium 10282, minimium 10001
-# maximium 10475, minimium 10451
-# maximium 11249, minimium 11201
+print(working_data.groupby("Boroughs").count()["id"].sort_values(ascending=False)) 
+
+look = working_data.loc[:, ['property_type', 'room_type', 'accommodates',
+       'bathrooms', 'bedrooms', 'beds', 'bed_type', 'amenities']]
+print(look.head())
+# https://chrisalbon.com/python/data_wrangling/pandas_apply_operations_to_groups/
+# df['preTestScore'].groupby([df['regiment'], df['company']]).mean()
+demean = lambda n: n / sum(n)
+print(working_data["room_type"].value_counts(normalize=True) * 100, **sp) 
+pp = working_data.groupby(["Boroughs", "room_type"]).size().reset_index()
+
+
+
+ggg = working_data.groupby(["Boroughs", "room_type"])
+pp.columns = ['Boroughs', 'room_type', 'number']
+cohortTable = pp.pivot(index = "Boroughs",
+                                 columns = "room_type",
+                                 values = "number")
+cohortTable.fillna(0, inplace=True)
+cohortTable["Total"] = cohortTable.sum(axis=1)
+cohortTable = cohortTable.div(cohortTable["Total"], axis=0)  * 100
+print(cohortTable, **sp)
+
+hh = pd.crosstab(working_data["Boroughs"], working_data["room_type"], normalize="columns", margins = True).replace(0, np.nan) * 100
+hh2 = pd.crosstab(working_data["Boroughs"], working_data["room_type"], normalize="index", margins = True).replace(0, np.nan) * 100
+print(hh, hh2, **sp)
+print(working_data["room_type"].value_counts(normalize=True) * 100, **sp) 
+print(hh2.loc["All", :])
+
+hh22 = pd.crosstab(working_data["room_type"],working_data["Boroughs"], normalize="columns", margins = True).fillna(0) * 100
+
+print(hh22, **sp)
+
+plt.bar
+
+
+
+
+
+
