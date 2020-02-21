@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 # plt.style.use('ggplot')
 # plt.style.use(['classic'])
-plt.style.use(['dark_background'])
+# plt.style.use(['dark_background'])
 
 # Define paths, functions and variables
 mydir = r"D:\project1"
@@ -165,6 +165,23 @@ plt.show()
 
 
 
+# get the counts of room_types per bourough
+working_data["Room Types"] = working_data["room_type"] 
+hh = pd.crosstab(working_data["Boroughs"], working_data["Room Types"], normalize="index", margins = True).fillna(0) * 100
+
+# Plot the distribution of listings room_types within the boroughs
+hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7))
+plt.xticks(rotation=0)
+plt.ylabel("Percent")
+plt.title("Airbnb Listing in New York")
+plt.show()
+
+
+
+
+
+
+
 
 
 
@@ -195,20 +212,43 @@ cohortTable["Total"] = cohortTable.sum(axis=1)
 cohortTable = cohortTable.div(cohortTable["Total"], axis=0)  * 100
 print(cohortTable, **sp)
 
-hh = pd.crosstab(working_data["Boroughs"], working_data["room_type"], normalize="columns", margins = True).replace(0, np.nan) * 100
-hh2 = pd.crosstab(working_data["Boroughs"], working_data["room_type"], normalize="index", margins = True).replace(0, np.nan) * 100
-print(hh, hh2, **sp)
-print(working_data["room_type"].value_counts(normalize=True) * 100, **sp) 
-print(hh2.loc["All", :])
-
-hh22 = pd.crosstab(working_data["room_type"],working_data["Boroughs"], normalize="columns", margins = True).fillna(0) * 100
-
-print(hh22, **sp)
-
-plt.bar
 
 
 
 
 
+cmap22 = [
+            'viridis', 'plasma', 'inferno', 'magma',
 
+            'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
+            'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
+            'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn',
+         
+            'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone', 'pink',
+            'spring', 'summer', 'autumn', 'winter', 'cool', 'Wistia',
+            'hot', 'afmhot', 'gist_heat', 'copper',
+    
+            'PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
+        
+            'Pastel1', 'Pastel2', 'Paired', 'Accent',
+            'Dark2', 'Set1', 'Set2', 'Set3',
+            'tab10', 'tab20', 'tab20b', 'tab20c',
+       
+            'flag', 'prism', 'ocean', 'gist_earth', 'terrain', 'gist_stern',
+            'gnuplot', 'gnuplot2', 'CMRmap', 'cubehelix', 'brg', 'hsv',
+            'gist_rainbow', 'rainbow', 'jet', 'nipy_spectral', 'gist_ncar']
+            
+cmap22 = [  'winter', 'tab20c']
+
+for color in cmap22:
+    # plt.title('This is for cmap: ' + color)
+    # plt.scatter(xplot, yplot, c=np.cos(xplot), cmap=i,
+    #             edgecolors='none',
+    #             s=np.power(xplot, 4))
+    hh.plot.bar(stacked=True, cmap=color)
+    plt.title('This is for cmap: ' + color)
+    plt.xticks(rotation=0)
+    plt.pause(4)
+    # plt.clf()
+    
+    plt.close()
