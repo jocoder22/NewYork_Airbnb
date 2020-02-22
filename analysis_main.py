@@ -147,7 +147,7 @@ ddf = working_data["Boroughs"].value_counts(normalize=True) * 100
 
 
 # Plot the Airbnb listing in New York
-plt.bar( ddf.index, ddf.values)
+plt.bar( ddf.index, ddf.values, edgecolor='#f88020')
 plt.xlabel("New York Boroughs")
 plt.ylabel("Percentage of Listings")
 plt.title("Airbnb Listing in New York")
@@ -158,7 +158,7 @@ plt.show()
 roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
 
 # # plot the room types
-plt.bar(roomtypes.index, roomtypes.values)
+plt.bar(roomtypes.index, roomtypes.values, edgecolor='#eb8242')
 plt.xlabel("Room Type")
 plt.ylabel("Percentage of Total")
 plt.title("Airbnb Listing in New York")
@@ -171,7 +171,7 @@ working_data["Room Types"] = working_data["room_type"]
 hh = pd.crosstab(working_data["Boroughs"], working_data["Room Types"], normalize="index", margins = True).fillna(0) * 100
 
 # Plot the distribution of listings room_types within the boroughs
-hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7))
+hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28"))
 plt.xticks(rotation=0)
 plt.ylabel("Percent")
 plt.title("Airbnb Listing in New York")
@@ -186,7 +186,7 @@ print(working_data.groupby("Boroughs")['price'].mean())
 ave_price = working_data.groupby("Boroughs", as_index=False).agg({'price': 'mean'})
 
 # # plot the Average price of listing in each Borough
-plt.bar(ave_price.Boroughs, ave_price.price)
+plt.bar(ave_price.Boroughs, ave_price.price, edgecolor='#010038')
 plt.xlabel("New York Boroughs")
 plt.ylabel("Average Price")
 plt.title("Airbnb Listing in New York")
@@ -194,6 +194,23 @@ plt.show()
 
 
 
+# Average price per room type in each Borough
+nprice_room = working_data.groupby(["Boroughs", "Room Types"], as_index=False).agg({'price': 'mean'})
+price_room = nprice_room.pivot(index = "Boroughs",
+                                 columns = "Room Types",
+                                 values = "price")
+price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
+plt.xlabel("New York Boroughs")
+plt.ylabel("Average Price")
+plt.title("Airbnb Listing in New York")
+plt.show()
+
+# # # plot the Average price of listing in each Borough
+# plt.bar(ave_price.Boroughs, ave_price.price)
+# plt.xlabel("New York Boroughs")
+# plt.ylabel("Average Price")
+# plt.title("Airbnb Listing in New York")
+# plt.show()
 
 """
 print(sorted(Queens), set(Queens).intersection(Staten_Island, Manhattan, Bronx, Brooklyn), sep='\n\n')
@@ -248,19 +265,24 @@ cmap22 = [
             'gnuplot', 'gnuplot2', 'CMRmap', 'cubehelix', 'brg', 'hsv',
             'gist_rainbow', 'rainbow', 'jet', 'nipy_spectral', 'gist_ncar']
             
-cmap22 = [  'winter', 'tab20c']
+cmap22 = [
+            
+    
+            'PRGn', 
+  'tab20c',
+       
+            ]
 
 for color in cmap22:
     # plt.title('This is for cmap: ' + color)
     # plt.scatter(xplot, yplot, c=np.cos(xplot), cmap=i,
     #             edgecolors='none',
     #             s=np.power(xplot, 4))
-    hh.plot.bar(stacked=True, cmap=color)
+    price_room.plot.bar(rot=0, cmap=color,  figsize=(50,27))
     plt.title('This is for cmap: ' + color)
     plt.xticks(rotation=0)
-    plt.pause(4)
+    plt.pause(8)
     # plt.clf()
     
     plt.close()
-    
-"""
+    """
