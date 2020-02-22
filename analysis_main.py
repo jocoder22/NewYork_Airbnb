@@ -175,6 +175,7 @@ hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
 plt.xticks(rotation=0)
 plt.ylabel("Percent")
 plt.title("Airbnb Listing in New York")
+plt.tight_layout()
 plt.show()
 
 
