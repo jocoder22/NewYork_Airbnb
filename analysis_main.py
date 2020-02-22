@@ -162,6 +162,7 @@ plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
 plt.xlabel("Room Type")
 plt.ylabel("Percentage of Total")
 plt.title("Airbnb Listing in New York")
+plt.tight_layout()
 plt.show()
 
 
