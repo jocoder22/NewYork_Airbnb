@@ -151,6 +151,7 @@ plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
 plt.xlabel("New York Boroughs")
 plt.ylabel("Percentage of Listings")
 plt.title("Airbnb Listing in New York")
+plt.tight_layout()
 plt.show()
 
 
