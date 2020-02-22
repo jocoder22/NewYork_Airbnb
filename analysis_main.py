@@ -190,6 +190,7 @@ plt.bar(ave_price.Boroughs, ave_price.price, edgecolor="#2b2b28")
 plt.xlabel("New York Boroughs")
 plt.ylabel("Average Price")
 plt.title("Airbnb Listing in New York")
+plt.tight_layout()
 plt.show()
 
 
@@ -203,6 +204,7 @@ price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
 plt.xlabel("New York Boroughs")
 plt.ylabel("Average Price")
 plt.title("Airbnb Listing in New York")
+plt.tight_layout()
 plt.show()
 
 # # # plot the Average price of listing in each Borough
