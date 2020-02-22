@@ -147,7 +147,7 @@ ddf = working_data["Boroughs"].value_counts(normalize=True) * 100
 
 
 # Plot the Airbnb listing in New York
-plt.bar( ddf.index, ddf.values, edgecolor='#f88020')
+plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
 plt.xlabel("New York Boroughs")
 plt.ylabel("Percentage of Listings")
 plt.title("Airbnb Listing in New York")
@@ -158,7 +158,7 @@ plt.show()
 roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
 
 # # plot the room types
-plt.bar(roomtypes.index, roomtypes.values, edgecolor='#eb8242')
+plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
 plt.xlabel("Room Type")
 plt.ylabel("Percentage of Total")
 plt.title("Airbnb Listing in New York")
@@ -171,7 +171,7 @@ working_data["Room Types"] = working_data["room_type"]
 hh = pd.crosstab(working_data["Boroughs"], working_data["Room Types"], normalize="index", margins = True).fillna(0) * 100
 
 # Plot the distribution of listings room_types within the boroughs
-hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28"))
+hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
 plt.xticks(rotation=0)
 plt.ylabel("Percent")
 plt.title("Airbnb Listing in New York")
@@ -186,7 +186,7 @@ print(working_data.groupby("Boroughs")['price'].mean())
 ave_price = working_data.groupby("Boroughs", as_index=False).agg({'price': 'mean'})
 
 # # plot the Average price of listing in each Borough
-plt.bar(ave_price.Boroughs, ave_price.price, edgecolor='#010038')
+plt.bar(ave_price.Boroughs, ave_price.price, edgecolor="#2b2b28")
 plt.xlabel("New York Boroughs")
 plt.ylabel("Average Price")
 plt.title("Airbnb Listing in New York")
