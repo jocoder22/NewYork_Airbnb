@@ -4,7 +4,12 @@ import numpy as np
 import pandas as pd
 import pickle
 from collections import OrderedDict
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # plt.style.use('ggplot')
 # plt.style.use(['classic'])
@@ -212,8 +217,21 @@ print2(working_data.shape)
 learningdata = working_data.dropna()
 print2(learningdata.shape)
 
-target = learningdata.pop("price")
+
+# Cells that are in green show positive correlation, 
+# while cells that are in red show negative correlation
+a, b = 0, 6
+while b < learningdata.shape[1]:
+    sns.heatmap(learningdata.iloc[:, a:b].corr(), square=True, cmap='RdYlGn')
+    a = b
+    b += 6
+    plt.pause(8) 
+    plt.close()
+    
+
+# target = learningdata.pop("price")
 print2(learningdata.shape)
+
 """
 
 ppp = ['number_of_reviews', 
