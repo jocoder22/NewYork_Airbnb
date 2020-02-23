@@ -3,32 +3,20 @@ import os
 import numpy as np
 import pandas as pd
 import pickle
-from collections import defaultdict
+from collections import OrderedDict
 import matplotlib.pyplot as plt
 
 # plt.style.use('ggplot')
 # plt.style.use(['classic'])
 # plt.style.use(['dark_background'])
 
+def print2(*args):
+    for arg in args:
+        print(arg, sep="\n\n", end="\n\n")
+
 # Define paths, functions and variables
 mydir = r"D:\project1"
-
-def createborough(zipcode, dict):
-    """The createborough function returns the borough with give zipcode
-
-    Args: 
-        dict (dict): Dictionary with keys and values for search
-        zipcode (int): Five digits zipcode
-
-    Returns: 
-        string: name of borough     
-
-    """
-    for key, val in dict.items():
-        if zipcode in val:
-            return key
-        
-
+     
 sp = {"sep":"\n\n", "end":"\n\n"}
 
 # A. Bussiness Understanding                 
@@ -49,15 +37,15 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 #           Download in the datasets from Airbnb and unitedstateszipcodes.org websites
 #   Airbnb websit: "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
 #   New York State Department of Health:  "https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm"
-
-# airbnb = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
-# listing_ny = pd.read_csv(airbnb)
-
-# # # Save data to local disk 
-# # # save as pickle file
-# pd.to_pickle(listing_ny, os.path.join(mydir, "airbnb_ny.pkl"))
+#   The data from New York State Department of Health is stored as csv file: nyczipcode.csv
 
 
+"""
+airbnb = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
+listing_ny = pd.read_csv(airbnb)
+nyc_zip = pd.read_csv(os.path.join(mydir, "nyczipcode.csv"))
+
+"""
 
 # C. Data preparation
 #     1. Clean the datasets
@@ -65,85 +53,95 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 #     3. Exploratory data analysis
 #     4. Data visualization
 
-ny_data = pd.read_pickle(os.path.join(mydir, "airbnb_ny.pkl"))
-# print(ny_data.columns, ny_data.shape)
 
 
-# select features to for data analysis
-feature_list = ['id', 'latitude', 'longitude',
-       'is_location_exact', 'property_type', 'room_type', 'accommodates',
-       'bathrooms', 'bedrooms', 'beds', 'bed_type', 'amenities',
-       'price', 'security_deposit',
-       'cleaning_fee', 'guests_included', 'extra_people', 'minimum_nights',
-       'maximum_nights', 'minimum_minimum_nights', 'maximum_minimum_nights',
-       'minimum_maximum_nights', 'maximum_maximum_nights', 'zipcode',
-       'minimum_nights_avg_ntm', 'maximum_nights_avg_ntm', 'calendar_updated',
-       'has_availability', 'availability_30', 'availability_60',
-       'availability_90', 'availability_365', 'calendar_last_scraped',
-       'number_of_reviews', 'number_of_reviews_ltm', 'first_review',
-       'last_review', 'review_scores_rating', 'review_scores_accuracy',
-       'review_scores_cleanliness', 'review_scores_checkin',
-       'review_scores_communication', 'review_scores_location',
-       'review_scores_value', 'requires_license',
-        'instant_bookable', 'is_business_travel_ready',
-       'cancellation_policy', 'require_guest_profile_picture',
-       'require_guest_phone_verification', 'calculated_host_listings_count',
-       'calculated_host_listings_count_entire_homes',
-       'calculated_host_listings_count_private_rooms',
-       'calculated_host_listings_count_shared_rooms', 'reviews_per_month']
+features_list = ['id', 'room_type', 'price','accommodates', 'bathrooms', 'bedrooms', 'beds', 'bed_type',  'minimum_nights', 
+             'number_of_reviews', 'reviews_per_month', 'calculated_host_listings_count', 'availability_365', 
+             'number_of_reviews', 'review_scores_value', 'reviews_per_month', 'instant_bookable', 'cancellation_policy', 
+             'require_guest_profile_picture', 'require_guest_phone_verification', 'security_deposit', 'cleaning_fee',
+             'guests_included', 'extra_people', 'minimum_nights', 'maximum_nights', 'zipcode', 'availability_30', 
+             'availability_60', 'availability_90', 'availability_365']
+
+remove_dollar = ['security_deposit','cleaning_fee', 'extra_people', 'price']
+for_dummy =  ['instant_bookable', 'require_guest_profile_picture', 'require_guest_phone_verification', 'bed_type'] 
 
 
-# get dtypes list
-working_data = ny_data.loc[:, feature_list]
-features_dtypes = "float64 int64 object".split()
+def dict_former(zipdata):
+    """The dict_former function forms an ordered dictionary from a DataFrame
 
-cat_features, int_features, float_features = [], [], []
+    Args: None
+        dataset (DataFrame): the DataFrame to turn into dictionary
 
-cat_list = [float_features, int_features,  cat_features]
+    Returns: 
+        dict: dictionary   
 
-for i, v in enumerate(features_dtypes):
-    colnames = working_data.select_dtypes(include=[v]).columns
-    cat_list[i].append(colnames)
-    print(f'There {len(colnames)} {v} features')
+    """
+    
+    _newdict = zipdata.to_dict(into=OrderedDict)
+    
+    newdict = {str(_newdict['localzip'][i]):_newdict['Name'][i] for i in range(len(_newdict['Name']))}
+
+    return newdict
     
 
-# clean zipcode by extracting digits, drop NaN and change it to integer
-working_data["zipcode"] = working_data['zipcode'].str.extract(r'(\d+)', expand=False)
-working_data.dropna(subset=["zipcode"], inplace=True)
-working_data["zipcode"] = working_data["zipcode"] .astype(int) 
 
-# create borough based on zipcode
-Nassau = [11001, 11559]
-Westchester = [10550, 10705]
-Bronx = [10453, 10457, 10460, 10458, 10467, 10468, 10451, 10452, 10456,
-	10454, 10455, 10459, 10474, 10463, 10471,
-	10466, 10469, 10470, 10475, 10461, 10462,10464, 10465, 10472, 10473]
-Brooklyn = [11212, 11213, 11216, 11233, 11238, 11209, 11214, 11228,
-	11204, 11218, 11219, 11230, 11234, 11236, 11239,
-	11223, 11224, 11229, 11235, 11201, 11205, 11215, 11217, 11231,
-	11203, 11210, 11225, 11226, 11207, 11208, 11211, 11222,
-	11220, 11232, 11206, 11221, 11237, 11249, 11243]
-Manhattan =	[10026, 10027, 10030, 10037, 10039, 10001, 10011, 10018, 10019, 10020, 10036,
-	10029, 10035, 10010, 10016, 10017, 10022,
-	10012, 10013, 10014, 10004, 10005, 10006, 10007, 10038, 10280,
-	10002, 10003, 10009, 10021, 10028, 10044, 10065, 10075, 10128,
-	10023, 10024, 10025, 10031, 10032, 10033, 10034, 10040,
-    10162, 10069, 10282, 10129, 10281, 10174, 10270]
-Queens = [11361, 11362, 11363, 11364, 11354, 11355, 11356, 11357, 11358, 11359, 11360,
-	11365, 11366, 11367, 11412, 11423, 11432, 11433, 11434, 11435, 11436,
-	11101, 11102, 11103, 11104, 11105, 11106, 11374, 11375, 11379, 11385,
-	11691, 11692, 11693, 11694, 11695, 11697, 11004, 11005, 11411, 11413, 11422, 11426, 11427, 11428, 11429,
-	11414, 11415, 11416, 11417, 11418, 11419, 11420, 11421,11368, 11369, 11370, 11372, 11373, 11377, 11378, 11109]
-Staten_Island = [10302, 10303, 10310, 10306, 10307, 10308, 10309, 10312, 10301, 10304, 10305, 10314]
+def data_clearner(data, data2, features, rmdollar, dummy):
+    """The data_clearner function will return a clean DataFrame after removing, replacing and
+        and cleaning the DataFrame to  a suitable form for further analysis
 
-zipdict = {"Queens":Queens, "Staten_Island":Staten_Island, "Manhattan":Manhattan,
-            "Bronx":Bronx, "Brooklyn":Brooklyn}
+    Args: 
+        data (DataFrame): the DataFrame for data_wrangling
+        data2 (DataFrame): DataFrame for creating search dictionary
+        features (list): list for features to select from the DataFrame
+        rmdollar (list): list of string features with dollar signs
+        dummy (list): list of categorical features to turn to dummy variables before feeding into machine learning
+        
+    Returns: 
+        DataFrame: The DataFrame for analysis
 
-# extract Boroughs based on zipcode
-working_data["Boroughs"] = working_data["zipcode"].apply(createborough, args=[zipdict])
+    """
+    
+    # select only the required feaatures
+    dataset = data[features]
+    
+    # extract only the five digits zipcodes 
+    dataset["zipcode"] = dataset['zipcode'].str.extract(r'(\d+)', expand=False)
+   
+    # create lookup dictionary
+    searchdict = dict_former(data2)
+    
+    # Create boroughs from zipcode
+    dataset["Boroughs"] = dataset.zipcode.replace(searchdict)
+    dataset = dataset.loc[dataset['Boroughs'].isin(searchdict.values())]
+    
+    # remove dollar signs and turn columns to float
+    for col in rmdollar:
+        dataset[col] = dataset[col].replace('[\$,]','', regex=True).astype(float)
+        
+    # form dummies for categorical features
+    for ele in dummy:
+        dataset = pd.get_dummies(dataset, columns=[ele], prefix=ele.split("_")[-1])
+        
+        
+    return dataset
 
+"""
+
+listing_ny = data_clearner(listing_ny, nyc_zip, features_list, remove_dollar, for_dummy)
+
+# # # Save data to local disk 
+# # # save as pickle file
+pd.to_pickle(listing_ny, os.path.join(mydir, "airbnb_ny.pkl"))
+
+"""
+
+# read dataset 
+working_data = pd.read_pickle(os.path.join(mydir, "airbnb_ny.pkl"))
+
+"""
 # Get listing percentage for each New York Borough
 ddf = working_data["Boroughs"].value_counts(normalize=True) * 100
+
 
 
 # Plot the Airbnb listing in New York
@@ -169,8 +167,7 @@ plt.show()
 
 
 # get the counts of room_types per bourough
-working_data["Room Types"] = working_data["room_type"] 
-hh = pd.crosstab(working_data["Boroughs"], working_data["Room Types"], normalize="index", margins = True).fillna(0) * 100
+hh = pd.crosstab(working_data["Boroughs"], working_data["room_type"], normalize="index", margins = True).fillna(0) * 100
 
 # Plot the distribution of listings room_types within the boroughs
 hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
@@ -181,11 +178,7 @@ plt.tight_layout()
 plt.show()
 
 
-# Remove $ sign from price and change dtype to float
-working_data['price'] = working_data['price'].replace('[\$,]','', regex=True).astype(float)
-
-# find aveage price of listing in each borough
-print(working_data.groupby("Boroughs")['price'].mean())
+# find average price of listing in each borough
 ave_price = working_data.groupby("Boroughs", as_index=False).agg({'price': 'mean'})
 
 # # plot the Average price of listing in each Borough
@@ -199,9 +192,9 @@ plt.show()
 
 
 # Average price per room type in each Borough
-nprice_room = working_data.groupby(["Boroughs", "Room Types"], as_index=False).agg({'price': 'mean'})
+nprice_room = working_data.groupby(["Boroughs", "room_type"], as_index=False).agg({'price': 'mean'})
 price_room = nprice_room.pivot(index = "Boroughs",
-                                 columns = "Room Types",
+                                 columns = "room_type",
                                  values = "price")
 price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
 plt.xlabel("New York Boroughs")
@@ -210,6 +203,89 @@ plt.title("Airbnb Listing in New York")
 plt.tight_layout()
 plt.show()
 
+
+
+"""
+
+# Prepare for Supervised machine learning
+print2(working_data.shape)
+learningdata = working_data.dropna()
+print2(learningdata.shape)
+
+target = learningdata.pop("price")
+print2(learningdata.shape)
+"""
+
+ppp = ['number_of_reviews', 
+       'review_scores_value', 'reviews_per_month']
+
+print(len(features2))
+cat_features, int_features, float_features = [], [], []
+features_dtypes = "float64 int64 object".split()
+cat_list = [float_features, int_features,  cat_features]
+
+for i, v in enumerate(features_dtypes):
+    colnames = listing_ny[features2].select_dtypes(include=[v]).columns.tolist()
+    cat_list[i].extend(colnames)
+    print(f'There {len(colnames)} {v} features')
+    
+for item in features2:
+    bb = len(listing_ny[item].unique())
+    print(f'{item} has {bb} groups')
+    print(listing_ny[[item]].head(), end='\n\n')
+    
+newlist = ['room_type', 
+           'instant_bookable',  'cancellation_policy', 
+           'require_guest_profile_picture', 'require_guest_phone_verification'
+           ]
+print(cat_features)
+
+for item in newlist:
+    # bb = len(listing_ny[item].unique())
+    print(listing_ny[item].unique(), end='\n\n')
+    # print(f'{item} has {bb} groups')
+
+
+string_to = ['security_deposit','cleaning_fee', 'extra_people']
+tf =  ['instant_bookable', 'require_guest_profile_picture', 'require_guest_phone_verification', 'bed_type']
+
+print2(listing_ny[string_to].head())
+
+def extractdigits(dataset, col):
+    dataset[col] = dataset[col].replace('[\$,]','', regex=True).astype(float)
+    
+def createdummy(data, col):
+    for ele in col:
+        data = pd.get_dummies(data, columns=[ele], prefix=ele.split("_")[-1])
+        # data.join(df_dummy)
+    return data
+    
+    
+for ele in string_to:
+    extractdigits(listing_ny, ele) 
+    
+
+newdata = createdummy(listing_ny[features2], tf) 
+      
+print2(listing_ny[string_to].head())
+
+print2(newdata.iloc[:,-7:].head())
+
+list44 = ['property_type', 'room_type', 'accommodates',
+       'bathrooms', 'bedrooms', 'beds', 'bed_type' ]
+
+
+for item in list44:
+    # bb = len(listing_ny[item].unique())
+    print(listing_ny[item].unique(), end='\n\n')
+    # print(f'{item} has {bb} groups')
+    
+print2(len(newdata.columns))
+
+# col2 = ["Name", "localzip"]
+# bb = pd.DataFrame({ "b":"Bronx", "a":Bronxa}, colums=col2)
+## Supervised learning
+
 # # # plot the Average price of listing in each Borough
 # plt.bar(ave_price.Boroughs, ave_price.price)
 # plt.xlabel("New York Boroughs")
@@ -217,7 +293,7 @@ plt.show()
 # plt.title("Airbnb Listing in New York")
 # plt.show()
 
-"""
+
 print(sorted(Queens), set(Queens).intersection(Staten_Island, Manhattan, Bronx, Brooklyn), sep='\n\n')
 print(working_data.loc[:,["Boroughs"]].head())
 
@@ -290,4 +366,25 @@ for color in cmap22:
     # plt.clf()
     
     plt.close()
-    """
+
+
+
+newcd = pd.read_csv(os.path.join(mydir, "nyczipcode.csv"))
+print2(newcd.head())
+
+from collections import OrderedDict, defaultdict
+def set_value(row_number, assigned_value): 
+    return assigned_value[row_number] 
+
+pp = newcd.to_dict(into=OrderedDict)
+
+gg = {str(pp['localzip'][i]):pp['Name'][i] for i in range(len(pp['Name']))}
+gg2 = {pp['localzip'][i]:pp['Name'][i] for i in range(len(pp['Name']))}
+print2(gg)
+
+# working_data["mm"] = working_data["zipcode"].apply(set_value, args=(gg,))
+working_data["mm"] = working_data["zipcode"].replace(gg2)
+
+print2(working_data.iloc[:,-3:])
+
+"""
