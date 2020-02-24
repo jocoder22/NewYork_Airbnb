@@ -6,8 +6,9 @@ import pickle
 from collections import OrderedDict
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -218,6 +219,8 @@ learningdata = working_data.dropna()
 print2(learningdata.shape)
 
 
+
+"""
 # Cells that are in green show positive correlation, 
 # while cells that are in red show negative correlation
 a, b = 0, 6
@@ -225,12 +228,64 @@ while b < learningdata.shape[1]:
     sns.heatmap(learningdata.iloc[:, a:b].corr(), square=True, cmap='RdYlGn')
     a = b
     b += 6
-    plt.pause(8) 
+    plt.pause(3) 
     plt.close()
-    
+"""
 
-# target = learningdata.pop("price")
+# scale the dataset
+scaler = StandardScaler()
+  
+learningdata = pd.get_dummies(learningdata, prefix="DD")
+target = learningdata.pop("price")
 print2(learningdata.shape)
+
+learningdata = scaler.fit_transform(learningdata)
+# Create training and test sets
+X_train, X_test, y_train, y_test = train_test_split(
+    learningdata, target, test_size=0.25, random_state=42)
+
+# Create the regressor: reg_all
+reg_all = LinearRegression()
+
+# Fit the regressor to the training data
+reg_all.fit(X_train, y_train)
+
+# Predict on the test data: y_pred
+y_pred = reg_all.predict(X_test)
+
+# Compute and print R^2 and RMSE
+print("R^2: {}".format(reg_all.score(X_test, y_test)))  
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+print("Root Mean Squared Error: {}".format(rmse))
+
+#Predict using your model
+y_test_preds = reg_all.predict(X_test)
+y_train_preds = reg_all.predict(X_train)
+
+#Score using your model
+test_score = r2_score(y_test, y_test_preds)
+train_score = r2_score(y_train, y_train_preds)
+
+print2(test_score, train_score)
+
+
+
+
+# Create a linear regression object: reg
+reg = LinearRegression()
+
+# Compute 5-fold cross-validation scores: cv_scores
+cv_scores = cross_val_score(reg, learningdata, target, cv=5)
+
+# Print the 5-fold cross-validation scores
+print(cv_scores)
+
+print("Average 5-Fold CV Score: {}".format(cv_scores.mean()))
+
+
+
+
+
 
 """
 
