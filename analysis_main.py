@@ -219,8 +219,6 @@ learningdata = working_data.dropna()
 print2(learningdata.shape)
 
 
-
-"""
 # Cells that are in green show positive correlation, 
 # while cells that are in red show negative correlation
 a, b = 0, 6
@@ -230,7 +228,6 @@ while b < learningdata.shape[1]:
     b += 6
     plt.pause(3) 
     plt.close()
-"""
 
 # scale the dataset
 scaler = StandardScaler()
