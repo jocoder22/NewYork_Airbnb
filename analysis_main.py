@@ -269,8 +269,6 @@ train_score = r2_score(y_train, y_train_preds)
 print2(test_score, train_score)
 
 
-
-
 # Create a linear regression object: reg
 reg = LinearRegression()
 
