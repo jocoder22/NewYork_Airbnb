@@ -259,6 +259,7 @@ print("Root Mean Squared Error: {}".format(rmse))
 y_test_preds = reg_all.predict(X_test)
 y_train_preds = reg_all.predict(X_train)
 
+
 #Score using your model
 test_score = r2_score(y_test, y_test_preds)
 train_score = r2_score(y_train, y_train_preds)
