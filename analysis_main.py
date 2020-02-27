@@ -144,6 +144,10 @@ pd.to_pickle(listing_ny, os.path.join(mydir, "airbnb_ny.pkl"))
 # read dataset 
 working_data = pd.read_pickle(os.path.join(mydir, "airbnb_ny.pkl"))
 
+print2(working_data.shape)
+(50122, 39)
+
+(50122, 39)
 
 # Get listing percentage for each New York Borough
 ddf = working_data["Boroughs"].value_counts(normalize=True) * 100
