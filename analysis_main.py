@@ -152,9 +152,27 @@ print2(working_data.shape)
 
 # Get listing percentage for each New York Borough
 ddf = working_data["Boroughs"].value_counts(normalize=True) * 100
+ddf2 = working_data["Boroughs"].value_counts() 
+print2("listing each Borough Percentages :", ddf, " listing each Borough Raw counts" , ddf2 )
+"""
+listing each Borough Percentages :
 
+Manhattan        43.577670
+Brooklyn         40.995970
+Queens           12.250110
+Bronx             2.424085
+Staten_Island     0.752165
+Name: Boroughs, dtype: float64
 
+ listing each Borough Raw counts
 
+Manhattan        21842
+Brooklyn         20548
+Queens            6140
+Bronx             1215
+Staten_Island      377
+Name: Boroughs, dtype: int64
+"""
 # Plot the Airbnb listing in New York
 plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
 plt.xlabel("New York City Borough")
@@ -168,7 +186,7 @@ plt.show()
 roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
 roomtypes2 = working_data["room_type"].value_counts()
 print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
-
+"""
 Roomtypes Percentages :
 
 Entire home/apt    51.638003   
@@ -184,7 +202,7 @@ Private room       22575
 Shared room         1248
 Hotel room           417
 Name: room_type, dtype: int64
-
+"""
 # # plot the room types
 plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
 plt.xlabel("Room Type")
