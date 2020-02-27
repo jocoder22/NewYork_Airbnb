@@ -267,6 +267,18 @@ plt.show()
 
 # find average price of listing in each borough
 ave_price = working_data.groupby("Boroughs", as_index=False).agg({'price': 'mean'})
+print2("average price of listing in each borough :", ave_price)
+"""
+average price of listing in each borough :
+
+        Boroughs       price
+0          Bronx   86.801646
+1       Brooklyn  124.476640
+2      Manhattan  211.268062
+3         Queens  100.639739
+4  Staten_Island  105.424403
+
+"""
 
 # # plot the Average price of listing in each Borough
 plt.bar(ave_price.Boroughs, ave_price.price, edgecolor="#2b2b28")
@@ -290,7 +302,42 @@ plt.title("Airbnb Listing in New York")
 plt.tight_layout()
 plt.show()
 
+print2("Average price per room type in each Borough :", nprice_room, 
+       "Average price per room type in each Borough: Pivot" , price_room )
 
+"""
+Average price per room type in each Borough :
+
+         Boroughs        room_type       price
+0           Bronx  Entire home/apt  127.755245
+1           Bronx     Private room   63.616667
+2           Bronx      Shared room   73.530303
+3        Brooklyn  Entire home/apt  178.874527
+4        Brooklyn       Hotel room  138.441860
+5        Brooklyn     Private room   75.274201
+6        Brooklyn      Shared room   67.259557
+7       Manhattan  Entire home/apt  245.840671
+8       Manhattan       Hotel room  295.560831
+9       Manhattan     Private room  156.346287
+10      Manhattan      Shared room   86.479570
+11         Queens  Entire home/apt  151.024499
+12         Queens       Hotel room  144.297297
+13         Queens     Private room   70.148229
+14         Queens      Shared room   83.669767
+15  Staten_Island  Entire home/apt  144.881443
+16  Staten_Island     Private room   64.629213
+17  Staten_Island      Shared room   26.800000
+
+Average price per room type in each Borough: Pivot
+
+room_type      Entire home/apt  Hotel room  Private room  Shared room
+Boroughs
+Bronx               127.755245         NaN     63.616667    73.530303
+Brooklyn            178.874527  138.441860     75.274201    67.259557
+Manhattan           245.840671  295.560831    156.346287    86.479570
+Queens              151.024499  144.297297     70.148229    83.669767
+Staten_Island       144.881443         NaN     64.629213    26.800000
+"""
 
 
 # Prepare for Supervised machine learning
