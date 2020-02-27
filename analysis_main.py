@@ -22,6 +22,7 @@ def print2(*args):
 
 # Define paths, functions and variables
 mydir = r"D:\project1"
+dir2 = r"C:\Users\okigb\Desktop"
      
 sp = {"sep":"\n\n", "end":"\n\n"}
 
@@ -156,9 +157,9 @@ ddf = working_data["Boroughs"].value_counts(normalize=True) * 100
 
 # Plot the Airbnb listing in New York
 plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
-plt.xlabel("New York Boroughs")
+plt.xlabel("New York City Borough")
 plt.ylabel("Percentage of Listings")
-plt.title("Airbnb Listing in New York")
+plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
 plt.show()
 
@@ -170,7 +171,7 @@ roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
 plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
 plt.xlabel("Room Type")
 plt.ylabel("Percentage of Total")
-plt.title("Airbnb Listing in New York")
+plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
 plt.show()
 
@@ -182,8 +183,9 @@ hh = pd.crosstab(working_data["Boroughs"], working_data["room_type"], normalize=
 # Plot the distribution of listings room_types within the boroughs
 hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
 plt.xticks(rotation=0)
+plt.xlabel("New York City Borough")
 plt.ylabel("Percent")
-plt.title("Airbnb Listing in New York")
+plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
 plt.show()
 
@@ -193,9 +195,9 @@ ave_price = working_data.groupby("Boroughs", as_index=False).agg({'price': 'mean
 
 # # plot the Average price of listing in each Borough
 plt.bar(ave_price.Boroughs, ave_price.price, edgecolor="#2b2b28")
-plt.xlabel("New York Boroughs")
+plt.xlabel("New York City Borough")
 plt.ylabel("Average Price")
-plt.title("Airbnb Listing in New York")
+plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
 plt.show()
 
@@ -207,7 +209,7 @@ price_room = nprice_room.pivot(index = "Boroughs",
                                  columns = "room_type",
                                  values = "price")
 price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
-plt.xlabel("New York Boroughs")
+plt.xlabel("New York City Borough")
 plt.ylabel("Average Price")
 plt.title("Airbnb Listing in New York")
 plt.tight_layout()
@@ -224,13 +226,13 @@ print2(learningdata.shape)
 
 # Cells that are in green show positive correlation, 
 # while cells that are in red show negative correlation
-a, b = 0, 6
-while b < learningdata.shape[1]:
-    sns.heatmap(learningdata.iloc[:, a:b].corr(), square=True, cmap='RdYlGn')
-    a = b
-    b += 6
-    plt.pause(3) 
-    plt.close()
+# a, b = 0, 6
+# while b < learningdata.shape[1]:
+#     sns.heatmap(learningdata.iloc[:, a:b].corr(), square=True, cmap='RdYlGn')
+#     a = b
+#     b += 6
+#     plt.pause(3) 
+#     plt.close()
 
 # scale the dataset
 scaler = StandardScaler()
