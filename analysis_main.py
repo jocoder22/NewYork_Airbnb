@@ -166,6 +166,24 @@ plt.show()
 
 # get the room types percentages
 roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
+roomtypes2 = working_data["room_type"].value_counts()
+print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
+
+Roomtypes Percentages :
+
+Entire home/apt    51.638003   
+Private room       45.040102   
+Shared room         2.489925   
+Hotel room          0.831970   
+Name: room_type, dtype: float64
+
+Raw counts
+
+Entire home/apt    25882
+Private room       22575
+Shared room         1248
+Hotel room           417
+Name: room_type, dtype: int64
 
 # # plot the room types
 plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
