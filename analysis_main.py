@@ -215,6 +215,45 @@ plt.show()
 
 # get the counts of room_types per bourough
 hh = pd.crosstab(working_data["Boroughs"], working_data["room_type"], normalize="index", margins = True).fillna(0) * 100
+hh2 = pd.crosstab(working_data["Boroughs"], working_data["room_type"],  margins = True).fillna(0)
+hh3 = pd.crosstab(working_data["Boroughs"], working_data["room_type"]).fillna(0) 
+print2("room_types per bourough Percentages :", hh, " room_types per bourough Raw counts" , hh2,
+        " room_types per bourough Raw counts", hh3 )
+
+"""
+room_types per bourough Percentages :
+
+room_type      Entire home/apt  Hotel room  Private room  Shared room
+Boroughs
+Bronx                35.308642    0.000000     59.259259     5.432099
+Brooklyn             47.552073    0.209266     49.819934     2.418727
+Manhattan            60.630895    1.542899     35.697280     2.128926
+Queens               36.563518    0.602606     59.332248     3.501629
+Staten_Island        51.458886    0.000000     47.214854     1.326260
+All                  51.638003    0.831970     45.040102     2.489925
+
+ room_types per bourough Raw counts
+
+room_type      Entire home/apt  Hotel room  Private room  Shared room    All
+Boroughs
+Bronx                      429           0           720           66   1215
+Brooklyn                  9771          43         10237          497  20548
+Manhattan                13243         337          7797          465  21842
+Queens                    2245          37          3643          215   6140
+Staten_Island              194           0           178            5    377
+All                      25882         417         22575         1248  50122
+
+ room_types per bourough Raw counts
+
+room_type      Entire home/apt  Hotel room  Private room  Shared room
+Boroughs
+Bronx                      429           0           720           66
+Brooklyn                  9771          43         10237          497
+Manhattan                13243         337          7797          465
+Queens                    2245          37          3643          215
+Staten_Island              194           0           178            5
+
+"""
 
 # Plot the distribution of listings room_types within the boroughs
 hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
