@@ -23,6 +23,7 @@ We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC
  - use http://www.jocoder22.com/medication/category/JSON 
 ## Question III
 ### what is the most popular and affordable Airbnb rooms in each New York borough
+We want to find the average price of Airbnb rooms according to room type
 ## Question IV
 ### what are the major determinants of prices of rooms in New York Airbnb 
 ## Conclusion
