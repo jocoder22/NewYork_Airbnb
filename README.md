@@ -12,6 +12,7 @@ Writing a Data Scientist Blog Post
     - `SQLAlchemy`
 ## Question I
 ### where are the Airbnb rrooms in New York
+We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC
 ## Question II
 ### where is the cheapest, most affordable best Airbnb rooms in New York
  [Google documentation](https://developers.google.com/identity/protocols/OAuth2)
