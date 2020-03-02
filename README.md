@@ -16,6 +16,7 @@ We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC
 ## Question II
 ### where is the cheapest, most affordable best Airbnb rooms in New York
  [Google documentation](https://developers.google.com/identity/protocols/OAuth2)
+ We want to find the average cost of Airbnb rooms in NYC boroughs
 
  run http://www.jocoder22.com/medication 
  - use http://www.jocoder22.com/medication/category/JSON 
