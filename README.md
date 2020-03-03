@@ -7,7 +7,7 @@
 # Your only New York Airbnb secrets
 This project will do analysis of Airbnb listing in NYC using publicly avaiable Airbnb data. The analysis will help people searching for vacation rooms in NYC. I hope the analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs.
 ## Introduction
-* **Required Libraries and dependencies** 
+* **Required packages and dependencies** 
   - `Python 3.7` 
     - `numpy`
     - `Pandas`
