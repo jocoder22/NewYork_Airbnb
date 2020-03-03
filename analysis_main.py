@@ -39,12 +39,12 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 
 # B. Data Understanding
 #     1. Seek for relevant datasets
-#           Our dataset comes for publicly available  Airbnb and New York State Department of Health form their websites
+#           Our dataset comes for publicly available  Airbnb and New York State Department of Health websites
 #     2. Download relevant datasets
-#           Download in the datasets from Airbnb and unitedstateszipcodes.org websites
-#   Airbnb websit: "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
+#           Download datasets from Airbnb and unitedstateszipcodes.org websites
+#   Airbnb data from website: "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-12-04/data/listings.csv.gz"
 #   New York State Department of Health:  "https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm"
-#   The data from New York State Department of Health is stored as csv file: nyczipcode.csv
+#   The data from New York State Department of Health website was stored as csv file: nyczipcode.csv
 
 
 """
