@@ -1,5 +1,5 @@
 # NewYork_Airbnb
-Writing a Data Scientist Blog Post
+# Writing a Data Scientist Blog Post
 
 # Discover New York best secret Airbnb for you
 # Rediscover New York City Airbnb 
@@ -8,9 +8,10 @@ Writing a Data Scientist Blog Post
 This project will do analysis of Airbnb listing in NYC using publicly avaiable Airbnb data. The analysis will help people searching for vacation rooms in NYC. I hope the analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs.
 ## Introduction
 * **Required Libraries and dependencies** 
-  - `Python 2.7` 
-    - `Flask`
-    - `SQLAlchemy`
+  - `Python 3.7` 
+    - `Pandas`
+    - `Matlabplot`
+    - `Scklearn`
 ## Question I
 ### where are the Airbnb rrooms in New York
 We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC
