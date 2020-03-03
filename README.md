@@ -9,9 +9,13 @@ This project will do analysis of Airbnb listing in NYC using publicly avaiable A
 ## Introduction
 * **Required Libraries and dependencies** 
   - `Python 3.7` 
+    - `numpy`
     - `Pandas`
+    - `pickle`
     - `Matlabplot`
     - `Scklearn`
+    - `Seaborn`
+    
 ## Question I
 ### where are the Airbnb rrooms in New York
 We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC
