@@ -18,7 +18,7 @@ This project will do analysis of Airbnb listing in NYC using publicly avaiable A
     
 ## Question I
 ### where are the Airbnb rrooms in New York
-We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC
+We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC using publicly available New York Airbnb data.
 ## Question II
 ### where is the cheapest, most affordable best Airbnb rooms in New York
  [Google documentation](https://developers.google.com/identity/protocols/OAuth2)
