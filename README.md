@@ -32,6 +32,6 @@ We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC usi
 We want to find the average price of Airbnb rooms according to room type in each NYC borough.
 ## Question IV
 ### what are the major determinants of prices of rooms in New York Airbnb 
-We want to find factors that positively and negatively impact the price of Airbnb rooms in NYC
+We want to find factors that positively and negatively impact the price of Airbnb rooms in NYC using linear regression analysis.
 ## Conclusion
 
