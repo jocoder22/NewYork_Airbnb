@@ -20,7 +20,7 @@ This project will do analysis of Airbnb listing in NYC using publicly avaiable A
 ### where are the Airbnb rrooms in New York
 We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC using publicly available New York Airbnb data.
 ## Question II
-### where is the cheapest, most affordable best Airbnb rooms in New York
+### where is the most affordable best Airbnb rooms in New York using average price in each borough.
  [Google documentation](https://developers.google.com/identity/protocols/OAuth2)
  
  We want to find the average cost of Airbnb rooms in NYC boroughs
