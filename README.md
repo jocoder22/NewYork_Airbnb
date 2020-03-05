@@ -11,9 +11,13 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
 
 * **Required packages and dependencies** 
   - `Python 3.7` 
+    - `os`
     - `numpy`
     - `Pandas`
     - `pickle`
+    - `regex`
+    - `collections`
+      - `defaultdict`
     - `Matlabplot`
     - `Scklearn`
     - `Seaborn`
