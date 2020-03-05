@@ -10,7 +10,8 @@ This project will do analysis of Airbnb listing in NYC using publicly avaiable A
 Using Airbnb data, we hope to gain insights on the distribution and spread of Airbnb listing accross the five borough of NYC. NYC being the most visited city in the world, travellers seeking accomodation in NYC will gain insight on affordable rooms and thier location in NYC.
 
 * **Required packages and dependencies** 
-  - `Python 3.7` 
+  
+  The analysis is done using `Python 3.7`. Packages used are: 
     - `os`
     - `numpy`
     - `Pandas`
