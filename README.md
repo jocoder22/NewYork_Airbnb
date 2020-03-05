@@ -1,5 +1,5 @@
 # NewYork_Airbnb
-# Writing a Data Scientist Blog Post
+Writing a Data Scientist Blog Post
 
 # Discover New York best secret Airbnb for you
 # Rediscover New York City Airbnb 
