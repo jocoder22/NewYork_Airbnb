@@ -54,7 +54,7 @@ Find jupyter notebook [here]()
 Github repository at this [link]() to see code and data wrangling/modeling techniques.
 
 ## blog post 
-See blog post at this [link]() 
+See blog post at this [link](https://medium.com/@okigbookey/special-new-york-city-airbnb-rooms-made-for-you-4699a4584144) 
    
 
 
