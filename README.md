@@ -30,9 +30,17 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
  ## Analysis questions
  Following the CRISP-DM process this project tend to find solutions to the following questions
 
-1) Pick a dataset.
-
-2) Pose at least three questions related to business or real-world applications of how the data could be used.
+## Question I
+### where are the Airbnb rrooms in New York
+We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC using publicly available New York Airbnb data.
+## Question II
+### where is the most affordable best Airbnb rooms in New York using average price in each borough.
+## Question III
+### what is the most popular and affordable Airbnb rooms in each New York borough
+We want to find the average price of Airbnb rooms according to room type in each NYC borough.
+## Question IV
+### what are the major determinants of prices of rooms in New York Airbnb 
+We want to find factors that positively and negatively impact the price of Airbnb rooms in NYC using linear regression analysis.
 
 3) Create a Jupyter Notebook, using any associated packages you'd like, to:
 
@@ -52,23 +60,7 @@ Create a blog post to share your questions and insights with a non-technical aud
     
     
     
-## Question I
-### where are the Airbnb rrooms in New York
-We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC using publicly available New York Airbnb data.
-## Question II
-### where is the most affordable best Airbnb rooms in New York using average price in each borough.
- [Google documentation](https://developers.google.com/identity/protocols/OAuth2)
- 
- We want to find the average cost of Airbnb rooms in NYC boroughs
 
- run http://www.jocoder22.com/medication 
- - use http://www.jocoder22.com/medication/category/JSON 
-## Question III
-### what is the most popular and affordable Airbnb rooms in each New York borough
-We want to find the average price of Airbnb rooms according to room type in each NYC borough.
-## Question IV
-### what are the major determinants of prices of rooms in New York Airbnb 
-We want to find factors that positively and negatively impact the price of Airbnb rooms in NYC using linear regression analysis.
 ## Conclusion
 #### the borough with the least average price
 #### the borough with least avearge price for rooms types
