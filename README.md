@@ -33,10 +33,11 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
 * Question I
    - Where are the Airbnb rooms in New York City?
       -  Analyzing the distribution of Airbnb listing in the 5 boroughs of NYC.
-# Question II
-### where is the most affordable best Airbnb rooms in New York using average price in each borough.
-## Question III
-### what is the most popular and affordable Airbnb rooms in each New York borough
+* Question II
+  - Where is the most affordable best Airbnb rooms in New York using average price in each borough.
+    -  Analyzing the distribution of Airbnb average prices in the 5 boroughs of NYC.
+* Question III
+  - What is the most popular and affordable Airbnb rooms in each New York borough
 We want to find the average price of Airbnb rooms according to room type in each NYC borough.
 ## Question IV
 ### what are the major determinants of prices of rooms in New York Airbnb 
