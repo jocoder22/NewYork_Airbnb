@@ -46,15 +46,9 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
 ## Jupyter Notebook
 Find jupyter notebook [here]()
 
-Prepare data:
-
-Gather necessary data to answer your questions
-Handle categorical and missing data
-Provide insight into the methods you chose and why you chose them
-Analyze, Model, and Visualize
-
-Provide a clear connection between your business questions and how the data answers them.
-4) Communicate your business insights:
+## Conclusion
+#### the borough with the least average price
+#### the borough with least avearge price for rooms types
 
 ## Github repository 
 Github repository at this [link]() to see code and data wrangling/modeling techniques.
@@ -62,7 +56,5 @@ Github repository at this [link]() to see code and data wrangling/modeling techn
 ## blog post 
 See blog post at this [link]() 
    
-## Conclusion
-#### the borough with the least average price
-#### the borough with least avearge price for rooms types
+
 
