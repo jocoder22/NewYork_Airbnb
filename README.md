@@ -32,7 +32,7 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
 
 * Question I
    - where are the Airbnb rrooms in New York
-      -We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC using publicly available New York Airbnb data.
+      - We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC using publicly available New York Airbnb data.
 ## Question II
 ### where is the most affordable best Airbnb rooms in New York using average price in each borough.
 ## Question III
