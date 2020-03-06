@@ -38,12 +38,13 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
     -  Analyzing the distribution of Airbnb average prices in the 5 boroughs of NYC.
 * Question III
   - What is the most popular and affordable Airbnb rooms in each New York borough
-We want to find the average price of Airbnb rooms according to room type in each NYC borough.
-## Question IV
-### what are the major determinants of prices of rooms in New York Airbnb 
-We want to find factors that positively and negatively impact the price of Airbnb rooms in NYC using linear regression analysis.
+    - Finding the average prices of Airbnb rooms according to room types in each NYC borough.
+* Question IV
+  - What are the major determinants of prices of rooms in New York Airbnb 
+    - Finding factors that positively and negatively impact the price of Airbnb rooms in NYC using linear regression analysis.
 
-3) Create a Jupyter Notebook, using any associated packages you'd like, to:
+## Jupyter Notebook
+Find jupyter notebook [here]()
 
 Prepare data:
 
@@ -55,13 +56,12 @@ Analyze, Model, and Visualize
 Provide a clear connection between your business questions and how the data answers them.
 4) Communicate your business insights:
 
-Create a Github repository to share your code and data wrangling/modeling techniques, with a technical audience in mind
-Create a blog post to share your questions and insights with a non-technical audience 
-    
-    
-    
-    
+## Github repository 
+Github repository at this [link]() to see code and data wrangling/modeling techniques.
 
+## blog post 
+See blog post at this [link]() 
+   
 ## Conclusion
 #### the borough with the least average price
 #### the borough with least avearge price for rooms types
