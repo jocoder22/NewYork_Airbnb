@@ -31,9 +31,9 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
  Following the CRISP-DM process this project tend to find solutions to the following questions
 
 * Question I
-   - where are the Airbnb rrooms in New York
-      - We are analyzing the distribution of Airbnb listing in the 5 boroughs of NYC using publicly available New York Airbnb data.
-## Question II
+   - Where are the Airbnb rooms in New York City?
+      -  Analyzing the distribution of Airbnb listing in the 5 boroughs of NYC.
+# Question II
 ### where is the most affordable best Airbnb rooms in New York using average price in each borough.
 ## Question III
 ### what is the most popular and affordable Airbnb rooms in each New York borough
