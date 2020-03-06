@@ -51,7 +51,7 @@ Find jupyter notebook [here]()
 #### the borough with least avearge price for rooms types
 
 ## Github repository 
-Github repository at this [link]() to see code and data wrangling/modeling techniques.
+Github repository at this [link](https://github.com/jocoder22/NewYork_Airbnb) to see code and data wrangling/modeling techniques.
 
 ## blog post 
 See blog post at this [link](https://medium.com/@okigbookey/special-new-york-city-airbnb-rooms-made-for-you-4699a4584144) 
