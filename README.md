@@ -5,7 +5,8 @@ Writing a Data Scientist Blog Post
 # Rediscover New York City Airbnb 
 # Undercover best Airbnb in New York
 # Your only New York Airbnb secrets
-This project will do analysis of Airbnb listing in NYC using publicly avaiable Airbnb data. The analysis will help people searching for vacation rooms in NYC. I hope the analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs.
+This project will do analysis of Airbnb listing in NYC using publicly avaiable Airbnb data. The project will compare rates between the NYC boroughs, and the properties that helps predict price. The analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs. but do following the CRISP-DM process in finding solutions
+
 ## Introduction
 Using Airbnb data, we hope to gain insights on the distribution and spread of Airbnb listing accross the five borough of NYC. NYC being the most visited city in the world, travellers seeking accomodation in NYC will gain insight on affordable rooms and thier location in NYC.
 
@@ -22,6 +23,34 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
     - `Matlabplot`
     - `Scklearn`
     - `Seaborn`
+    
+ ## Dataset
+ Publicly avaiable [Airbnb NYC dataset](http://insideairbnb.com/get-the-data.html)
+ 
+ ## Analysis questions
+ Following the CRISP-DM process this project tend to find solutions to the following questions
+
+1) Pick a dataset.
+
+2) Pose at least three questions related to business or real-world applications of how the data could be used.
+
+3) Create a Jupyter Notebook, using any associated packages you'd like, to:
+
+Prepare data:
+
+Gather necessary data to answer your questions
+Handle categorical and missing data
+Provide insight into the methods you chose and why you chose them
+Analyze, Model, and Visualize
+
+Provide a clear connection between your business questions and how the data answers them.
+4) Communicate your business insights:
+
+Create a Github repository to share your code and data wrangling/modeling techniques, with a technical audience in mind
+Create a blog post to share your questions and insights with a non-technical audience 
+    
+    
+    
     
 ## Question I
 ### where are the Airbnb rrooms in New York
