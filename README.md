@@ -5,9 +5,10 @@ Writing a Data Scientist Blog Post
 # Rediscover New York City Airbnb 
 # Undercover best Airbnb in New York
 # Your only New York Airbnb secrets
-This project will do analysis of Airbnb listing in NYC using publicly avaiable Airbnb data. The project will compare rates between the NYC boroughs, and the properties that helps predict price. The analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs. but do following the CRISP-DM process in finding solutions
 
 ## Introduction
+The project analyzed Airbnb listing in NYC using publicly avaiable Airbnb data. The project compared rates between the NYC boroughs, and the properties that helps predict price. The analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs. but do following the CRISP-DM process in finding solutions
+
 Using Airbnb data, we hope to gain insights on the distribution and spread of Airbnb listing accross the five borough of NYC. NYC being the most visited city in the world, travellers seeking accomodation in NYC will gain insight on affordable rooms and thier location in NYC.
 
 * **Required packages and dependencies** 
