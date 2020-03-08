@@ -16,9 +16,11 @@ import seaborn as sns
 # plt.style.use(['classic'])
 # plt.style.use(['dark_background'])
 
+'''
 def print2(*args):
     for arg in args:
         print(arg, sep="\n\n", end="\n\n")
+'''
 
 # Define paths, functions and variables
 mydir = r"D:\project1"
