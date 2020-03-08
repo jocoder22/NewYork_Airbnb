@@ -67,8 +67,8 @@ nyc_zip = pd.read_csv(os.path.join(mydir, "nyczipcode.csv"))
 
 features_list = ['id', 'room_type', 'price','accommodates', 'bathrooms', 'bedrooms', 'beds', 'bed_type',  'minimum_nights', 
              'number_of_reviews', 'reviews_per_month', 'calculated_host_listings_count', 'availability_365', 
-             'number_of_reviews', 'review_scores_value', 'reviews_per_month', 'instant_bookable', 'cancellation_policy', 
-             'require_guest_profile_picture', 'require_guest_phone_verification', 'security_deposit', 'cleaning_fee',
+             'review_scores_value',  'instant_bookable', 'cancellation_policy', 'cleaning_fee',
+             'require_guest_profile_picture', 'require_guest_phone_verification', 'security_deposit', 
              'guests_included', 'extra_people', 'minimum_nights', 'maximum_nights', 'zipcode', 'availability_30', 
              'availability_60', 'availability_90', 'availability_365']
 
