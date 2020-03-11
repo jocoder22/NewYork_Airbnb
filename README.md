@@ -16,7 +16,7 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
   The analysis is done using `Python 3.8.1`. Packages used are: 
     - `os`
     - `numpy.4`
-    - `Pandas`
+    - `Pandas1.01`
     - `pickle`
     - `regex`
     - `collections`
