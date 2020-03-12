@@ -135,28 +135,100 @@ pd.to_pickle(listing_ny, os.path.join(mydir, "airbnb_ny.pkl"))
 datta = pd.read_pickle(os.path.join(mydir, "df.pkl"))
 working_data = data_clearner(datta, features_list, remove_dollar, cat)
 print2(working_data.shape)
+# (45078, 32)
+# pd.to_pickle(working_data, os.path.join(mydir, "airbnb_ny.pkl"))
 
-pd.to_pickle(working_data, os.path.join(mydir, "airbnb_ny.pkl"))
+
+# Get listing percentage for each New York Borough
+ddf = working_data["neighbourhood_group_cleansed"].value_counts(normalize=True) * 100
+ddf2 = working_data["neighbourhood_group_cleansed"].value_counts() 
+# print2("listing each Borough Percentages :", ddf, " listing each Borough Raw counts" , ddf2 )
 
 
-(51097, 32)
+"""
 
 listing each Borough Percentages :
 
-Manhattan        44.028025
-Brooklyn         40.411374
-Queens           12.317749
-Bronx             2.487426
-Staten Island     0.755426
+Manhattan        42.559563
+Brooklyn         42.049337
+Queens           12.041351
+Bronx             2.555570
+Staten Island     0.794179
 Name: neighbourhood_group_cleansed, dtype: float64
 
  listing each Borough Raw counts
 
-Manhattan        22497
-Brooklyn         20649
-Queens            6294
-Bronx             1271
-Staten Island      386
+Manhattan        19185
+Brooklyn         18955
+Queens            5428
+Bronx             1152
+Staten Island      358
+Name: neighbourhood_group_cleansed, dtype: int64
+
+"""
+
+# Plot the Airbnb listing in New York
+plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
+plt.xlabel("New York City Borough")
+plt.ylabel("Percentage of Listings")
+plt.title("  New York City Airbnb Listing ")
+plt.tight_layout()
+plt.show()
+
+
+# get the room types percentages
+roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
+roomtypes2 = working_data["room_type"].value_counts()
+# print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
+
+
+
+
+"""
+
+Roomtypes Percentages :
+
+Entire home/apt    53.653667
+Private room       43.901682
+Shared room         2.036470
+Hotel room          0.408181
+Name: room_type, dtype: float64
+
+Raw counts
+
+Entire home/apt    24186
+Private room       19790
+Shared room          918
+Hotel room           184
+Name: room_type, dtype: int64
+
+"""
+
+
+
+# Get listing percentage for each New York Borough
+ddf = working_data["neighbourhood_group_cleansed"].value_counts(normalize=True) * 100
+ddf2 = working_data["neighbourhood_group_cleansed"].value_counts() 
+# print2("listing each Borough Percentages :", ddf, " listing each Borough Raw counts" , ddf2 )
+
+
+"""
+listing each Borough Percentages :
+
+Manhattan        42.559563
+Brooklyn         42.049337
+Queens           12.041351
+Bronx             2.555570
+Staten Island     0.794179
+Name: neighbourhood_group_cleansed, dtype: float64
+
+ listing each Borough Raw counts
+
+Manhattan        19185
+Brooklyn         18955
+Queens            5428
+Bronx             1152
+Staten Island      358
 Name: neighbourhood_group_cleansed, dtype: int64
 
 
@@ -173,232 +245,178 @@ plt.show()
 # get the room types percentages
 roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
 roomtypes2 = working_data["room_type"].value_counts()
-print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
+# print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2)
+
 """
+
+
 Roomtypes Percentages :
 
-Entire home/apt    51.766249
-Private room       44.953715
-Shared room         2.497211
-Hotel room          0.782825
+Entire home/apt    53.653667
+Private room       43.901682
+Shared room         2.036470
+Hotel room          0.408181
 Name: room_type, dtype: float64
 
 Raw counts
 
-Entire home/apt    26451
-Private room       22970
-Shared room         1276
-Hotel room           400
+Entire home/apt    24186
+Private room       19790
+Shared room          918
+Hotel room           184
 Name: room_type, dtype: int64
 
 
+"""
+# # plot the room types
+plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
+plt.xlabel("Room Type")
+plt.ylabel("Percentage of Total")
+plt.title("  New York City Airbnb Listing ")
+plt.tight_layout()
+plt.show()
 
 
 
-
-
-# # Get listing percentage for each New York Borough
-# ddf = working_data["neighbourhood_group_cleansed"].value_counts(normalize=True) * 100
-# ddf2 = working_data["neighbourhood_group_cleansed"].value_counts() 
-# print2("listing each Borough Percentages :", ddf, " listing each Borough Raw counts" , ddf2 )
-# """
-
-# (51097, 32)
-
-# listing each Borough Percentages :
-
-# Manhattan        44.028025
-# Brooklyn         40.411374
-# Queens           12.317749
-# Bronx             2.487426
-# Staten Island     0.755426
-# Name: neighbourhood_group_cleansed, dtype: float64
-
-#  listing each Borough Raw counts
-
-# Manhattan        22497
-# Brooklyn         20649
-# Queens            6294
-# Bronx             1271
-# Staten Island      386
-# Name: neighbourhood_group_cleansed, dtype: int64
-
-average price of listing in each borough :
-
-# """
-# # Plot the Airbnb listing in New York
-# plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
-# plt.xlabel("New York City Borough")
-# plt.ylabel("Percentage of Listings")
-# plt.title("  New York City Airbnb Listing ")
-# plt.tight_layout()
-# plt.show()
-
-
-# # get the room types percentages
-# roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
-# roomtypes2 = working_data["room_type"].value_counts()
-# print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
-# """
-# Roomtypes Percentages :
-
-# Entire home/apt    51.766249
-# Private room       44.953715
-# Shared room         2.497211
-# Hotel room          0.782825
-# Name: room_type, dtype: float64
-
-# Raw counts
-
-# Entire home/apt    26451
-# Private room       22970
-# Shared room         1276
-# Hotel room           400
-# Name: room_type, dtype: int64
-
-
-# """
-# # # plot the room types
-# plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
-# plt.xlabel("Room Type")
-# plt.ylabel("Percentage of Total")
-# plt.title("  New York City Airbnb Listing ")
-# plt.tight_layout()
-# plt.show()
-
-
-
-# # get the counts of room_types per bourough
-# hh = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"], normalize="index", margins = True).fillna(0) * 100
-# hh2 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"],  margins = True).fillna(0)
-# hh3 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"]).fillna(0) 
+# get the counts of room_types per bourough
+hh = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"], normalize="index", margins = True).fillna(0) * 100
+hh2 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"],  margins = True).fillna(0)
+hh3 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"]).fillna(0) 
 # print2("room_types per bourough Percentages :", hh, " room_types per bourough Raw counts" , hh2,
 #         " room_types per bourough Raw counts", hh3 )
 
-# """
-
-# room_types per bourough Percentages :
-
-# room_type                     Entire home/apt  Hotel room  Private room  Shared room
-# neighbourhood_group_cleansed
-# Bronx                               35.247836    0.000000     60.110149     4.642014
-# Brooklyn                            48.065282    0.150128     49.489079     2.295511
-# Manhattan                           60.465840    1.475752     35.733653     2.324754
-# Queens                              36.367969    0.587861     59.628217     3.415952
-# Staten Island                       48.186528    0.000000     50.518135     1.295337
-# All                                 51.766249    0.782825     44.953715     2.497211
-
-#  room_types per bourough Raw counts
-
-# room_type                     Entire home/apt  Hotel room  Private room  Shared room    All
-# neighbourhood_group_cleansed
-# Bronx                                     448           0           764           59   1271
-# Brooklyn                                 9925          31         10219          474  20649
-# Manhattan                               13603         332          8039          523  22497
-# Queens                                   2289          37          3753          215   6294
-# Staten Island                             186           0           195            5    386
-# All                                     26451         400         22970         1276  51097
-
-#  room_types per bourough Raw counts
-
-# room_type                     Entire home/apt  Hotel room  Private room  Shared room
-# neighbourhood_group_cleansed
-# Bronx                                     448           0           764           59
-# Brooklyn                                 9925          31         10219          474
-# Manhattan                               13603         332          8039          523
-# Queens                                   2289          37          3753          215
-# Staten Island                             186           0           195            5
-
-# """
-
-# # Plot the distribution of listings room_types within the boroughs
-# hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
-# plt.xticks(rotation=0)
-# plt.xlabel("New York City Borough")
-# plt.ylabel("Percent")
-# plt.title("  New York City Airbnb Listing ")
-# plt.tight_layout()
-# plt.show()
+"""
 
 
-# # find average price of listing in each borough
-# ave_price = working_data.groupby("neighbourhood_group_cleansed", as_index=False).agg({'price': 'mean'})
+room_types per bourough Percentages :
+
+room_type                     Entire home/apt  Hotel room  Private room  Shared room
+neighbourhood_group_cleansed
+Bronx                               37.847222    0.000000     58.246528     3.906250
+Brooklyn                            51.015563    0.068583     47.280401     1.635452
+Manhattan                           60.734949    0.828772     36.340891     2.095387
+Queens                              41.341194    0.221076     55.563744     2.873987
+Staten Island                       51.396648    0.000000     47.206704     1.396648
+All                                 53.653667    0.408181     43.901682     2.036470
+
+ room_types per bourough Raw counts
+
+room_type                     Entire home/apt  Hotel room  Private room  Shared room    All
+neighbourhood_group_cleansed
+Bronx                                     436           0           671           45   1152
+Brooklyn                                 9670          13          8962          310  18955
+Manhattan                               11652         159          6972          402  19185
+Queens                                   2244          12          3016          156   5428
+Staten Island                             184           0           169            5    358
+All                                     24186         184         19790          918  45078
+
+ room_types per bourough Raw counts
+
+room_type                     Entire home/apt  Hotel room  Private room  Shared room
+neighbourhood_group_cleansed
+Bronx                                     436           0           671           45
+Brooklyn                                 9670          13          8962          310
+Manhattan                               11652         159          6972          402
+Queens                                   2244          12          3016          156
+Staten Island                             184           0           169            5
+
+
+"""
+
+# Plot the distribution of listings room_types within the boroughs
+hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
+plt.xticks(rotation=0)
+plt.xlabel("New York City Borough")
+plt.ylabel("Percent")
+plt.title("  New York City Airbnb Listing ")
+plt.tight_layout()
+plt.show()
+
+
+# find average price of listing in each borough
+ave_price = working_data.groupby("neighbourhood_group_cleansed", as_index=False).agg({'price': 'mean'})
 # print2("average price of listing in each borough :", ave_price)
-# """
-
-# average price of listing in each borough :
-
-#   neighbourhood_group_cleansed       price
-# 0                        Bronx   89.025964
-# 1                     Brooklyn  125.086542
-# 2                    Manhattan  215.083078
-# 3                       Queens   97.342390
-# 4                Staten Island  104.528497
-
-# """
-
-# # # plot the Average price of listing in each Borough
-# plt.bar(ave_price.neighbourhood_group_cleansed, ave_price.price, edgecolor="#2b2b28")
-# plt.xlabel("New York City Borough")
-# plt.ylabel("Average Price")
-# plt.title("  New York City Airbnb Listing ")
-# plt.tight_layout()
-# plt.show()
 
 
-
-# # Average price per room type in each Borough
-# nprice_room = working_data.groupby(["neighbourhood_group_cleansed", "room_type"], as_index=False, observed=True).agg({'price': 'mean'})
-# price_room = nprice_room.pivot(index = 'neighbourhood_group_cleansed',
-#                                  columns = "room_type",
-#                                  values = "price")
-# price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
-# plt.xlabel("New York City Borough")
-# plt.ylabel("Average Price")
-# plt.title("Airbnb Listing in New York")
-# plt.tight_layout()
-# plt.show()
-
-# print2("Average price per room type in each Borough :", nprice_room, 
-#        "Average price per room type in each Borough: Pivot" , price_room )
+"""
 
 
-# """
-# Average price per room type in each Borough :
+average price of listing in each borough :
 
-#    neighbourhood_group_cleansed        room_type       price
-# 0                     Manhattan  Entire home/apt  245.426009
-# 1                     Manhattan     Private room  166.725215
-# 2                     Manhattan      Shared room  102.160612
-# 3                     Manhattan       Hotel room  320.662651
-# 4                      Brooklyn  Entire home/apt  178.137531
-# 5                      Brooklyn     Private room   76.045797
-# 6                      Brooklyn      Shared room   68.027426
-# 7                      Brooklyn       Hotel room  178.709677
-# 8                        Queens  Entire home/apt  145.311927
-# 9                        Queens     Private room   68.413802
-# 10                       Queens      Shared room   83.525581
-# 11                       Queens       Hotel room  144.297297
-# 12                Staten Island  Entire home/apt  150.102151
-# 13                Staten Island     Private room   62.964103
-# 14                Staten Island      Shared room   30.200000
-# 15                        Bronx  Entire home/apt  130.747768
-# 16                        Bronx     Private room   65.299738
-# 17                        Bronx      Shared room   79.457627
+  neighbourhood_group_cleansed       price
+0                        Bronx   92.307292
+1                     Brooklyn  128.416249
+2                    Manhattan  208.563722
+3                       Queens  102.608696
+4                Staten Island  109.069832
 
-# Average price per room type in each Borough: Pivot
 
-# room_type                     Entire home/apt  Hotel room  Private room  Shared room
-# neighbourhood_group_cleansed
-# Bronx                              130.747768         NaN     65.299738    79.457627
-# Brooklyn                           178.137531  178.709677     76.045797    68.027426
-# Manhattan                          245.426009  320.662651    166.725215   102.160612
-# Queens                             145.311927  144.297297     68.413802    83.525581
-# Staten Island                      150.102151         NaN     62.964103    30.200000
+"""
+
+# # plot the Average price of listing in each Borough
+plt.bar(ave_price.neighbourhood_group_cleansed, ave_price.price, edgecolor="#2b2b28")
+plt.xlabel("New York City Borough")
+plt.ylabel("Average Price")
+plt.title("  New York City Airbnb Listing ")
+plt.tight_layout()
+plt.show()
 
 
 
-# """
+# Average price per room type in each Borough
+nprice_room = working_data.groupby(["neighbourhood_group_cleansed", "room_type"], as_index=False, observed=True).agg({'price': 'mean'})
+price_room = nprice_room.pivot(index = 'neighbourhood_group_cleansed',
+                                 columns = "room_type",
+                                 values = "price")
+price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
+plt.xlabel("New York City Borough")
+plt.ylabel("Average Price")
+plt.title("Airbnb Listing in New York")
+plt.tight_layout()
+plt.show()
+
+print2("Average price per room type in each Borough :", nprice_room, 
+       "Average price per room type in each Borough: Pivot" , price_room )
+
+
+"""
+
+
+Average price per room type in each Borough :
+
+   neighbourhood_group_cleansed        room_type       price
+0                     Manhattan  Entire home/apt  251.344576
+1                     Manhattan     Private room  140.018503
+2                     Manhattan      Shared room  115.079602
+3                     Manhattan       Hotel room  315.452830
+4                      Brooklyn  Entire home/apt  177.941675
+5                      Brooklyn     Private room   76.305735
+6                      Brooklyn      Shared room   87.238710
+7                      Brooklyn       Hotel room  195.230769
+8                        Queens  Entire home/apt  145.081551
+9                        Queens     Private room   71.163462
+10                       Queens      Shared room   96.724359
+11                       Queens       Hotel room  139.916667
+12                Staten Island  Entire home/apt  150.842391
+13                Staten Island     Private room   65.923077
+14                Staten Island      Shared room   30.200000
+15                        Bronx  Entire home/apt  131.529817
+16                        Bronx     Private room   66.782414
+17                        Bronx      Shared room   92.888889
+
+Average price per room type in each Borough: Pivot
+
+room_type                     Entire home/apt  Hotel room  Private room  Shared room
+neighbourhood_group_cleansed
+Bronx                              131.529817         NaN     66.782414    92.888889
+Brooklyn                           177.941675  195.230769     76.305735    87.238710
+Manhattan                          251.344576  315.452830    140.018503   115.079602
+Queens                             145.081551  139.916667     71.163462    96.724359
+Staten Island                      150.842391         NaN     65.923077    30.200000
+
+
+
+"""
 
 
 
