@@ -139,10 +139,57 @@ print2(working_data.shape)
 pd.to_pickle(working_data, os.path.join(mydir, "airbnb_ny.pkl"))
 
 
+(51097, 32)
+
+listing each Borough Percentages :
+
+Manhattan        44.028025
+Brooklyn         40.411374
+Queens           12.317749
+Bronx             2.487426
+Staten Island     0.755426
+Name: neighbourhood_group_cleansed, dtype: float64
+
+ listing each Borough Raw counts
+
+Manhattan        22497
+Brooklyn         20649
+Queens            6294
+Bronx             1271
+Staten Island      386
+Name: neighbourhood_group_cleansed, dtype: int64
 
 
+"""
+# Plot the Airbnb listing in New York
+plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
+plt.xlabel("New York City Borough")
+plt.ylabel("Percentage of Listings")
+plt.title("  New York City Airbnb Listing ")
+plt.tight_layout()
+plt.show()
 
 
+# get the room types percentages
+roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
+roomtypes2 = working_data["room_type"].value_counts()
+print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
+"""
+Roomtypes Percentages :
+
+Entire home/apt    51.766249
+Private room       44.953715
+Shared room         2.497211
+Hotel room          0.782825
+Name: room_type, dtype: float64
+
+Raw counts
+
+Entire home/apt    26451
+Private room       22970
+Shared room         1276
+Hotel room           400
+Name: room_type, dtype: int64
 
 
 
@@ -176,6 +223,7 @@ pd.to_pickle(working_data, os.path.join(mydir, "airbnb_ny.pkl"))
 # Staten Island      386
 # Name: neighbourhood_group_cleansed, dtype: int64
 
+average price of listing in each borough :
 
 # """
 # # Plot the Airbnb listing in New York
