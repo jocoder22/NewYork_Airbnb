@@ -76,29 +76,15 @@ features_list = ['id',  'host_id', 'host_since', 'host_is_superhost', 'neighbour
 
 remove_dollar = ['security_deposit','cleaning_fee', 'extra_people', 'price']
 
+cat = ['host_is_superhost', 'neighbourhood_group_cleansed',
+       'host_has_profile_pic', 'host_identity_verified', 'is_location_exact',
+       'room_type', 'bed_type',  'instant_bookable',
+       'require_guest_profile_picture', 'require_guest_phone_verification']]
+
 for_dummy =  ['instant_bookable', 'require_guest_profile_picture', 'require_guest_phone_verification', 'bed_type'] 
 
 
-def dict_former(zipdata):
-    """The dict_former function forms an ordered dictionary from a DataFrame
-
-    Args: None
-        dataset (DataFrame): the DataFrame to turn into dictionary
-
-    Returns: 
-        dict: dictionary   
-
-    """
-    
-    _newdict = zipdata.to_dict(into=OrderedDict)
-    
-    newdict = {str(_newdict['localzip'][i]):_newdict['Name'][i] for i in range(len(_newdict['Name']))}
-
-    return newdict
-    
-
-
-def data_clearner(data, data2, features, rmdollar, dummy):
+def data_clearner(data, features, rmdollar):
     """The data_clearner function will return a clean DataFrame after removing, replacing and
         and cleaning the DataFrame to  a suitable form for further analysis
 
@@ -116,16 +102,7 @@ def data_clearner(data, data2, features, rmdollar, dummy):
     
     # select only the required feaatures
     dataset = data[features]
-    
-    # extract only the five digits zipcodes 
-    dataset["zipcode"] = dataset['zipcode'].str.extract(r'(\d+)', expand=False)
-   
-    # create lookup dictionary
-    searchdict = dict_former(data2)
-    
-    # Create boroughs from zipcode
-    dataset["Boroughs"] = dataset.zipcode.replace(searchdict)
-    dataset = dataset.loc[dataset['Boroughs'].isin(searchdict.values())]
+
     
     # remove dollar signs and turn columns to float
     for col in rmdollar:
