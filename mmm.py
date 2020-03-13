@@ -397,15 +397,26 @@ def preanalysis(data1):
     df.loc[:, "days"] = df["date"].apply(lambda x: (ddate - x).days)
 
     # Drop the datetime columns
-    df.drop(['host_since', 'date'], axis=1, inplace=True)
+    df.drop(['host_since', 'date', "id", "host_id"], axis=1, inplace=True)
 
 
 
     # get dummies
-    dff = pd.get_dummies(df, prefix_sep="_")
+    dff = pd.get_dummies(df, drop_first=True, prefix_sep="_")
 
     return dff
-    
+
+
+
+def dfform(data1):
+    v = pd.DataFrame(data1, columns=["coefficients"])
+    vv = pd.DataFrame(X_test.columns, columns=["features"])
+    df2 = pd.concat([vv, v], axis=1, join="inner")
+    df3 = df2.sort_values(by="coefficients")
+
+    return df3
+
+
 working_data2 = preanalysis(working_data)
 print2(len(working_data2.columns))
 
@@ -435,9 +446,15 @@ print2("price" in list(working_data2.columns))
 
 pl = Pipeline([
             ("scaler", StandardScaler()),
-            ("dtree", DecisionTreeRegressor())
+            # ("dtree", DecisionTreeRegressor())
             # ("reg1",  LinearRegression())
-            # ("reg2", RandomForestRegressor())
+            ("reg2", RandomForestRegressor(n_estimators = 100,
+                           n_jobs = -1,
+                           oob_score = True,
+                           bootstrap = True,
+                           random_state = 42))
+    
+        
 ])
 
 pl.fit(X_train, y_train)
@@ -446,6 +463,75 @@ pred = pl.predict(X_test)
 print("mean_absolute_error : ", mean_absolute_error(y_test, pred))
 print("mean_squared_error: ", mean_squared_error(y_test, pred))
 print("Root mean_squared_error: ", np.sqrt(mean_squared_error(y_test, pred)))
+print("R_squared : ", pl.score(X_test, y_test))
+
+
+
+
+import eli5
+from eli5.permutation_importance import get_score_importances
+
+rf = RandomForestRegressor(n_estimators = 100,
+                           n_jobs = -1,
+                           oob_score = True,
+                           bootstrap = True,
+                           random_state = 42)
+
+
+
+
+
+
+
+rf = pl[-1]
+print('R^2 Training Score: {:.2f} \nOOB Score: {:.2f} \nR^2 Validation Score: {:.2f}'.format(rf.score(X_train, y_train), 
+                                                                                             rf.oob_score_,
+                                                                                             rf.score(X_test, y_test)))
+
+
+# plt.bar(X_test.columns, pl[-1].coef_)
+
+data7 = dfform(pl[-1].feature_importances_)
+
+plt.barh(data7.features, data7.coefficients)
+plt.xticks(rotation=45)
+# plt.axhline(y=0.0, color='black', linestyle='-')
+plt.show()
+
+
+
+from sklearn.metrics import r2_score
+from rfpimp import permutation_importances
+
+def r2(pl, X_train, y_train):
+    return r2_score(y_train, pl.predict(X_train))
+
+perm_= permutation_importances(pl, X_train, y_train, r2)
+
+pp = pd.DataFrame(perm_.reset_index())
+ppp = pp.sort_values(by="Importance")
+plt.barh(ppp.Feature, ppp.Importance)
+plt.xticks(rotation=45)
+# plt.axhline(y=0.0, color='black', linestyle='-')
+plt.show()
+
+print2(perm_, ppp.head())
+
+
+
+
+# base_score, score_decreases = get_score_importances(rf, X_train, y_train)
+# feature_importances = np.mean(score_decreases, axis=0)
+# print2("#"*90, feature_importances)
+
+
+import eli5
+from eli5.sklearn import PermutationImportance
+
+rf.fit(X_train, y_train)
+perm = PermutationImportance(rf, cv = None, refit = False, n_iter = 50).fit(X_train, y_train)
+perm_imp_eli5 = dfform(perm.feature_importances_)
+print2(perm_imp_eli5.head(), perm_imp_eli5)
 
 
 # Cells that are in green show positive correlation, 
