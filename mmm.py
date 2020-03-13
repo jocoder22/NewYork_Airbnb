@@ -533,7 +533,47 @@ perm = PermutationImportance(rf, cv = None, refit = False, n_iter = 50).fit(X_tr
 perm_imp_eli5 = dfform(perm.feature_importances_)
 print2(perm_imp_eli5.head(), perm_imp_eli5)
 
+"""
 
+                                      features  coefficients
+22  neighbourhood_group_cleansed_Staten Island      0.000003
+31                      bed_type_Pull-out Sofa      0.000004
+30                              bed_type_Futon      0.000005
+23                      host_has_profile_pic_t      0.000006
+32                           bed_type_Real Bed      0.000215
+35          require_guest_phone_verification_t      0.000287
+34             require_guest_profile_picture_t      0.000332
+29                              bed_type_Couch      0.000410
+21         neighbourhood_group_cleansed_Queens      0.000819
+26                        room_type_Hotel room      0.000827
+18                         host_is_superhost_t      0.001015
+33                          instant_bookable_t      0.001871
+24                    host_identity_verified_t      0.002330
+25                         is_location_exact_t      0.002806
+19       neighbourhood_group_cleansed_Brooklyn      0.003001
+11                             guests_included      0.012350
+8                                         beds      0.017263
+12                                extra_people      0.017477
+6                              availability_30      0.017951
+14                             availability_60      0.020871
+2                            number_of_reviews      0.027677
+15                             availability_90      0.031557
+7                                     bedrooms      0.040290
+20      neighbourhood_group_cleansed_Manhattan      0.043741
+9                             security_deposit      0.045480
+5                               maximum_nights      0.052783
+16                            availability_365      0.058787
+28                       room_type_Shared room      0.059069
+3                                     latitude      0.070106
+1                                    bathrooms      0.099160
+0                                 accommodates      0.111321
+13                              minimum_nights      0.155781
+27                      room_type_Private room      0.285804
+10                                cleaning_fee      0.329109
+4                                    longitude      0.374817
+17                                        days      0.42590
+
+"""
 # Cells that are in green show positive correlation, 
 # while cells that are in red show negative correlation
 # a, b = 0, 6
