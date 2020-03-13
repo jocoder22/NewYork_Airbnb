@@ -402,9 +402,9 @@ def preanalysis(data1):
 
 
     # get dummies
-    dff = pd.get_dummies(df, drop_first=True, prefix_sep="_")
+    # dff = pd.get_dummies(df, drop_first=True, prefix_sep="_")
 
-    return dff
+    return df
 
 
 
@@ -420,6 +420,11 @@ def dfform(data1):
 working_data2 = preanalysis(working_data)
 print2(len(working_data2.columns))
 
+working_data2.to_csv(os.path.join(mydir, 'clean.csv'), index=False, compression='gzip')
+# data = pd.read_csv('textdata.csv', compression='gzip')
+# car = pd.read_csv('car.csv', compression='gzip')
+
+"""
 
 for item in cat:
     bb = len(working_data[item].unique())
@@ -532,6 +537,15 @@ rf.fit(X_train, y_train)
 perm = PermutationImportance(rf, cv = None, refit = False, n_iter = 50).fit(X_train, y_train)
 perm_imp_eli5 = dfform(perm.feature_importances_)
 print2(perm_imp_eli5.head(), perm_imp_eli5)
+
+
+
+
+"""
+
+
+
+
 
 """
 
