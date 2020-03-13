@@ -6,11 +6,13 @@ import pickle
 from collections import OrderedDict
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
+from datetime import datetime
+
 
 # plt.style.use('ggplot')
 # plt.style.use(['classic'])
@@ -24,7 +26,7 @@ def print2(*args):
 
 # Define paths, functions and variables
 mydir = r"D:\NewYork_Airbnb"
-dir2 = r"C:\Users\okigb\Desktop"
+dir2 = r"C:\Users\HP\Desktop"
      
 sp = {"sep":"\n\n", "end":"\n\n"}
 
@@ -65,11 +67,10 @@ nyc_zip = pd.read_csv(os.path.join(mydir, "nyczipcode.csv"))
 
 
 features_list = ['id',  'host_id', 'host_since', 'host_is_superhost', 'neighbourhood_group_cleansed',
-             'host_has_profile_pic', 'host_identity_verified', 'accommodates', 'bathrooms', 
+             'host_has_profile_pic', 'host_identity_verified', 'accommodates', 'bathrooms', 'number_of_reviews', 
             'latitude', 'longitude', 'is_location_exact',  'room_type', 'maximum_nights','availability_30',
-            'bedrooms', 'beds', 'bed_type',  'amenities',  'price',  'security_deposit', 
-             'cleaning_fee', 'guests_included', 'extra_people', 'minimum_nights',  
-             'availability_60', 'availability_90', 'availability_365', 'number_of_reviews', 
+            'bedrooms', 'beds', 'bed_type', 'price',  'security_deposit', 'cleaning_fee', 'guests_included',
+            'extra_people', 'minimum_nights', 'availability_60', 'availability_90', 'availability_365',   
             'instant_bookable',  'require_guest_profile_picture', 'require_guest_phone_verification']           
 
 remove_dollar = ['security_deposit','cleaning_fee', 'extra_people', 'price']
@@ -112,11 +113,11 @@ def data_clearner(data, features, rmdollar, catfeatures):
 
     # remove dollar signs and turn columns to float
     for col in rmdollar:
-        dataset[col] = dataset[col].replace('[\$,]','', regex=True).astype(float)
+        dataset.loc[:, col] = dataset.loc[:, col].replace('[\$,]','', regex=True).astype(float)
         
     # # features to turn to categorical features
     for ele in catfeatures:
-        dataset[ele] = dataset[ele].astype("category", inplace=True)
+        dataset.loc[:, ele] = dataset.loc[:, ele].astype("category", inplace=True)
         
         
     return dataset
@@ -173,6 +174,7 @@ plt.xlabel("New York City Borough")
 plt.ylabel("Percentage of Listings")
 plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
+plt.savefig(os.path.join(dir2, "Listings.png"))
 plt.show()
 
 
@@ -180,66 +182,6 @@ plt.show()
 roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
 roomtypes2 = working_data["room_type"].value_counts()
 # print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
-
-
-
-
-"""
-
-Roomtypes Percentages :
-
-Entire home/apt    53.653667
-Private room       43.901682
-Shared room         2.036470
-Hotel room          0.408181
-Name: room_type, dtype: float64
-
-Raw counts
-
-Entire home/apt    24186
-Private room       19790
-Shared room          918
-Hotel room           184
-Name: room_type, dtype: int64
-
-"""
-
-
-
-# Get listing percentage for each New York Borough
-ddf = working_data["neighbourhood_group_cleansed"].value_counts(normalize=True) * 100
-ddf2 = working_data["neighbourhood_group_cleansed"].value_counts() 
-# print2("listing each Borough Percentages :", ddf, " listing each Borough Raw counts" , ddf2 )
-
-
-"""
-listing each Borough Percentages :
-
-Manhattan        42.559563
-Brooklyn         42.049337
-Queens           12.041351
-Bronx             2.555570
-Staten Island     0.794179
-Name: neighbourhood_group_cleansed, dtype: float64
-
- listing each Borough Raw counts
-
-Manhattan        19185
-Brooklyn         18955
-Queens            5428
-Bronx             1152
-Staten Island      358
-Name: neighbourhood_group_cleansed, dtype: int64
-
-
-"""
-# Plot the Airbnb listing in New York
-plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
-plt.xlabel("New York City Borough")
-plt.ylabel("Percentage of Listings")
-plt.title("  New York City Airbnb Listing ")
-plt.tight_layout()
-plt.show()
 
 
 # get the room types percentages
@@ -274,6 +216,7 @@ plt.xlabel("Room Type")
 plt.ylabel("Percentage of Total")
 plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
+plt.savefig(os.path.join(dir2, "RoomTypes.png"))
 plt.show()
 
 
@@ -330,6 +273,7 @@ plt.xlabel("New York City Borough")
 plt.ylabel("Percent")
 plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
+plt.savefig(os.path.join(dir2, "BoroughRoomType.png"))
 plt.show()
 
 
@@ -359,6 +303,7 @@ plt.xlabel("New York City Borough")
 plt.ylabel("Average Price")
 plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
+plt.savefig(os.path.join(dir2, "Prices.png"))
 plt.show()
 
 
@@ -373,6 +318,7 @@ plt.xlabel("New York City Borough")
 plt.ylabel("Average Price")
 plt.title("Airbnb Listing in New York")
 plt.tight_layout()
+plt.savefig(os.path.join(dir2, "BoRoomPrice.png"))
 plt.show()
 
 print2("Average price per room type in each Borough :", nprice_room, 
@@ -424,9 +370,82 @@ Staten Island                      150.842391         NaN     65.923077    30.20
 
 
 # Prepare for Supervised machine learning
-# print2(working_data.shape)
-# learningdata = working_data.dropna()
-# print2(learningdata.shape)
+print2(working_data.shape)
+learningdata = working_data.dropna()
+print2(learningdata.shape)
+
+
+def preanalysis(data1):
+    """The 'preanalysis' function replaces or drop missing, NAN or Na and
+        get dummies from categorical features.
+ 
+    Args: 
+        'data1' (DataFrame): the DataFrame for data_wrangling
+
+ 
+    Returns: 
+        DataFrame: The DataFrame for analysis
+ 
+    """
+    # drop nans
+    df = data1.dropna()
+
+    # Extra the number of days
+    ddate = datetime(2020, 2, 12)
+
+    df.loc[:, "date"] = pd.to_datetime(df['host_since'], format='%Y-%m-%d')
+    df.loc[:, "days"] = df["date"].apply(lambda x: (ddate - x).days)
+
+    # Drop the datetime columns
+    df.drop(['host_since', 'date'], axis=1, inplace=True)
+
+
+
+    # get dummies
+    dff = pd.get_dummies(df, prefix_sep="_")
+
+    return dff
+    
+working_data2 = preanalysis(working_data)
+print2(len(working_data2.columns))
+
+
+for item in cat:
+    bb = len(working_data[item].unique())
+    print(f'{item} has {bb} groups')
+    # print(working_data[[item]].head(), end='\n\n')
+    print(working_data[item].value_counts(), end='\n\n')
+
+print2(working_data2.info())
+
+
+
+from sklearn.ensemble import RandomForestRegressor 
+from sklearn.model_selection import train_test_split 
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.pipeline import Pipeline
+
+
+print2("price" in list(working_data2.columns))
+target = working_data2.pop("price")
+
+X_train, X_test, y_train, y_test = train_test_split(working_data2, target, test_size=0.25)
+
+print2("price" in list(working_data2.columns))
+
+pl = Pipeline([
+            ("scaler", StandardScaler()),
+            ("dtree", DecisionTreeRegressor())
+            # ("reg1",  LinearRegression())
+            # ("reg2", RandomForestRegressor())
+])
+
+pl.fit(X_train, y_train)
+pred = pl.predict(X_test)
+
+print("mean_absolute_error : ", mean_absolute_error(y_test, pred))
+print("mean_squared_error: ", mean_squared_error(y_test, pred))
+print("Root mean_squared_error: ", np.sqrt(mean_squared_error(y_test, pred)))
 
 
 # Cells that are in green show positive correlation, 
