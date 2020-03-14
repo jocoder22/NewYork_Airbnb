@@ -497,18 +497,6 @@ print("R_squared : ", pl.score(X_test, y_test))
 
 
 
-import eli5
-from eli5.permutation_importance import get_score_importances
-
-rf = RandomForestRegressor(n_estimators = 100,
-                           n_jobs = -1,
-                           oob_score = True,
-                           bootstrap = True,
-                           random_state = 42)
-
-
-
-
 
 
 
@@ -529,7 +517,7 @@ plt.axvline(x= 0.0, color='black', linestyle='-')
 plt.axvline(x=-10.0, color='red', linestyle='-')
 # plt.tight_layout()
 plt.gcf().subplots_adjust(left=0.15)
-plt.savefig(os.path.join(dir2, "LinearCoeff1.png"))
+plt.savefig(os.path.join(dir2, "LinearCoeff1.jpeg"))
 plt.show()
 
 
@@ -617,16 +605,83 @@ print2(perm_, ppp.head())
 
 
 
+
+
+
+print2("#"*190)
+from sklearn.base import clone 
+
+def drop_col_feat_imp(model, X_train, y_train, random_state = 42):
+    
+    # clone the model to have the exact same specification as the one initially trained
+    model_clone = clone(model)
+    # set random_state for comparability
+    model_clone.random_state = random_state
+    # training and scoring the benchmark model
+    model_clone.fit(X_train, y_train)
+    benchmark_score = model_clone.score(X_train, y_train)
+    # list for storing feature importances
+    importances = []
+    
+    # iterating over all columns and storing feature importance (difference between benchmark and new model)
+    for col in X_train.columns:
+        model_clone = clone(model)
+        model_clone.random_state = random_state
+        model_clone.fit(X_train.drop(col, axis = 1), y_train)
+        drop_col_score = model_clone.score(X_train.drop(col, axis = 1), y_train)
+        importances.append(benchmark_score - drop_col_score)
+    
+    importances_df = dfform(importances)
+    return importances_df
+
+
+ddd = drop_col_feat_imp(pl2, X_train, y_train)
+
+print2(ddd)
+ddd.sort_values(by="coefficients", inplace=True)
+plt.barh(ddd.features, ddd.coefficients)
+plt.xticks(rotation=45)
+plt.axvline(x=0.003, color='red', linestyle='-')
+plt.axvline(x= 0.0, color='black', linestyle='-')
+plt.axvline(x= -0.001, color='red', linestyle='-')
+# plt.axvline(x=-10.0, color='red', linestyle='-')
+plt.gcf().subplots_adjust(left=0.15)
+plt.savefig(os.path.join(dir2, "CustomImportance1.png"))
+plt.show()
+
+
+plt.bar(ddd.features, ddd.coefficients)
+plt.xticks(np.arange(len(ddd.features)), rotation = 45, ha="right")
+plt.axhline(y=0.003, color='red', linestyle='-')
+plt.axhline(y= 0.0, color='black', linestyle='-')
+plt.axhline(y= -0.001, color='red', linestyle='-')
+# plt.axvline(x=-10.0, color='red', linestyle='-')
+plt.gcf().subplots_adjust(bottom=0.25)
+plt.savefig(os.path.join(dir2, "CustomImportance2.png"))
+plt.show()
+
+
+
+
+
+
 # base_score, score_decreases = get_score_importances(rf, X_train, y_train)
 # feature_importances = np.mean(score_decreases, axis=0)
-# print2("#"*90, feature_importances)
+print2("#"*190)
 
 
 import eli5
 from eli5.sklearn import PermutationImportance
+from eli5.permutation_importance import get_score_importances
 
-rf.fit(X_train, y_train)
-perm = PermutationImportance(rf, cv = None, refit = False, n_iter = 50).fit(X_train, y_train)
+rf = RandomForestRegressor(n_estimators = 100,
+                           n_jobs = -1,
+                           oob_score = True,
+                           bootstrap = True,
+                           random_state = 42)
+
+pl2.fit(X_train, y_train)
+perm = PermutationImportance(pl2, cv = None, refit = False, n_iter = 50).fit(X_train, y_train)
 perm_imp_eli5 = dfform(perm.feature_importances_)
 print2(perm_imp_eli5.head(), perm_imp_eli5)
 
@@ -637,6 +692,18 @@ plt.axvline(x=0.020, color='red', linestyle='-')
 plt.savefig(os.path.join(dir2, "eli5Importance.png"))
 plt.gcf().subplots_adjust(left=0.15)
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
