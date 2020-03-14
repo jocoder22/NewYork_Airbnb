@@ -281,5 +281,39 @@ Mid-Island	10314
 """
 print(pandas_pickle[pandas_pickle["Newcity2"] == "Nassau County"]["zipcode"].unique())  
     
+
+
+
+
+
+"""
+
+rom sklearn.base import clone 
+
+def drop_col_feat_imp(model, X_train, y_train, random_state = 42):
+    
+    # clone the model to have the exact same specification as the one initially trained
+    model_clone = clone(model)
+    # set random_state for comparability
+    model_clone.random_state = random_state
+    # training and scoring the benchmark model
+    model_clone.fit(X_train, y_train)
+    benchmark_score = model_clone.score(X_train, y_train)
+    # list for storing feature importances
+    importances = []
+    
+    # iterating over all columns and storing feature importance (difference between benchmark and new model)
+    for col in X_train.columns:
+        model_clone = clone(model)
+        model_clone.random_state = random_state
+        model_clone.fit(X_train.drop(col, axis = 1), y_train)
+        drop_col_score = model_clone.score(X_train.drop(col, axis = 1), y_train)
+        importances.append(benchmark_score - drop_col_score)
+    
+    importances_df = imp_df(X_train.columns, importances)
+    return importances_df
+
+
+"""
     
     

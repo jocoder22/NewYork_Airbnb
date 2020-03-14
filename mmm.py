@@ -132,6 +132,7 @@ pd.to_pickle(listing_ny, os.path.join(mydir, "airbnb_ny.pkl"))
 
 """
 
+
 # read dataset 
 datta = pd.read_pickle(os.path.join(mydir, "df.pkl"))
 working_data = data_clearner(datta, features_list, remove_dollar, cat)
@@ -140,229 +141,244 @@ print2(working_data.shape)
 # pd.to_pickle(working_data, os.path.join(mydir, "airbnb_ny.pkl"))
 
 
-# Get listing percentage for each New York Borough
-ddf = working_data["neighbourhood_group_cleansed"].value_counts(normalize=True) * 100
-ddf2 = working_data["neighbourhood_group_cleansed"].value_counts() 
-# print2("listing each Borough Percentages :", ddf, " listing each Borough Raw counts" , ddf2 )
 
 
-"""
-
-listing each Borough Percentages :
-
-Manhattan        42.559563
-Brooklyn         42.049337
-Queens           12.041351
-Bronx             2.555570
-Staten Island     0.794179
-Name: neighbourhood_group_cleansed, dtype: float64
-
- listing each Borough Raw counts
-
-Manhattan        19185
-Brooklyn         18955
-Queens            5428
-Bronx             1152
-Staten Island      358
-Name: neighbourhood_group_cleansed, dtype: int64
-
-"""
-
-# Plot the Airbnb listing in New York
-plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
-plt.xlabel("New York City Borough")
-plt.ylabel("Percentage of Listings")
-plt.title("  New York City Airbnb Listing ")
-plt.tight_layout()
-plt.savefig(os.path.join(dir2, "Listings.png"))
-plt.show()
+# # Get listing percentage for each New York Borough
+# ddf = working_data["neighbourhood_group_cleansed"].value_counts(normalize=True) * 100
+# ddf2 = working_data["neighbourhood_group_cleansed"].value_counts() 
+# # print2("listing each Borough Percentages :", ddf, " listing each Borough Raw counts" , ddf2 )
 
 
-# get the room types percentages
-roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
-roomtypes2 = working_data["room_type"].value_counts()
-# print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
+# """
+
+# listing each Borough Percentages :
+
+# Manhattan        42.559563
+# Brooklyn         42.049337
+# Queens           12.041351
+# Bronx             2.555570
+# Staten Island     0.794179
+# Name: neighbourhood_group_cleansed, dtype: float64
+
+#  listing each Borough Raw counts
+
+# Manhattan        19185
+# Brooklyn         18955
+# Queens            5428
+# Bronx             1152
+# Staten Island      358
+# Name: neighbourhood_group_cleansed, dtype: int64
+
+# """
+
+# # Plot the Airbnb listing in New York
+# plt.bar( ddf.index, ddf.values,  edgecolor="#2b2b28")
+# plt.xlabel("New York City Borough")
+# plt.ylabel("Percentage of Listings")
+# plt.title("  New York City Airbnb Listing ")
+# plt.tight_layout()
+# plt.savefig(os.path.join(dir2, "Listings.png"))
+# plt.show()
 
 
-# get the room types percentages
-roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
-roomtypes2 = working_data["room_type"].value_counts()
-# print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2)
-
-"""
+# # get the room types percentages
+# roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
+# roomtypes2 = working_data["room_type"].value_counts()
+# # print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2 )
 
 
-Roomtypes Percentages :
+# # get the room types percentages
+# roomtypes = working_data["room_type"].value_counts(normalize=True) * 100
+# roomtypes2 = working_data["room_type"].value_counts()
+# # print2("Roomtypes Percentages :", roomtypes, "Raw counts" , roomtypes2)
 
-Entire home/apt    53.653667
-Private room       43.901682
-Shared room         2.036470
-Hotel room          0.408181
-Name: room_type, dtype: float64
-
-Raw counts
-
-Entire home/apt    24186
-Private room       19790
-Shared room          918
-Hotel room           184
-Name: room_type, dtype: int64
+# """
 
 
-"""
-# # plot the room types
-plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
-plt.xlabel("Room Type")
-plt.ylabel("Percentage of Total")
-plt.title("  New York City Airbnb Listing ")
-plt.tight_layout()
-plt.savefig(os.path.join(dir2, "RoomTypes.png"))
-plt.show()
+# Roomtypes Percentages :
+
+# Entire home/apt    53.653667
+# Private room       43.901682
+# Shared room         2.036470
+# Hotel room          0.408181
+# Name: room_type, dtype: float64
+
+# Raw counts
+
+# Entire home/apt    24186
+# Private room       19790
+# Shared room          918
+# Hotel room           184
+# Name: room_type, dtype: int64
 
 
-
-# get the counts of room_types per bourough
-hh = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"], normalize="index", margins = True).fillna(0) * 100
-hh2 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"],  margins = True).fillna(0)
-hh3 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"]).fillna(0) 
-# print2("room_types per bourough Percentages :", hh, " room_types per bourough Raw counts" , hh2,
-#         " room_types per bourough Raw counts", hh3 )
-
-"""
-
-
-room_types per bourough Percentages :
-
-room_type                     Entire home/apt  Hotel room  Private room  Shared room
-neighbourhood_group_cleansed
-Bronx                               37.847222    0.000000     58.246528     3.906250
-Brooklyn                            51.015563    0.068583     47.280401     1.635452
-Manhattan                           60.734949    0.828772     36.340891     2.095387
-Queens                              41.341194    0.221076     55.563744     2.873987
-Staten Island                       51.396648    0.000000     47.206704     1.396648
-All                                 53.653667    0.408181     43.901682     2.036470
-
- room_types per bourough Raw counts
-
-room_type                     Entire home/apt  Hotel room  Private room  Shared room    All
-neighbourhood_group_cleansed
-Bronx                                     436           0           671           45   1152
-Brooklyn                                 9670          13          8962          310  18955
-Manhattan                               11652         159          6972          402  19185
-Queens                                   2244          12          3016          156   5428
-Staten Island                             184           0           169            5    358
-All                                     24186         184         19790          918  45078
-
- room_types per bourough Raw counts
-
-room_type                     Entire home/apt  Hotel room  Private room  Shared room
-neighbourhood_group_cleansed
-Bronx                                     436           0           671           45
-Brooklyn                                 9670          13          8962          310
-Manhattan                               11652         159          6972          402
-Queens                                   2244          12          3016          156
-Staten Island                             184           0           169            5
-
-
-"""
-
-# Plot the distribution of listings room_types within the boroughs
-hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
-plt.xticks(rotation=0)
-plt.xlabel("New York City Borough")
-plt.ylabel("Percent")
-plt.title("  New York City Airbnb Listing ")
-plt.tight_layout()
-plt.savefig(os.path.join(dir2, "BoroughRoomType.png"))
-plt.show()
-
-
-# find average price of listing in each borough
-ave_price = working_data.groupby("neighbourhood_group_cleansed", as_index=False).agg({'price': 'mean'})
-# print2("average price of listing in each borough :", ave_price)
-
-
-"""
-
-
-average price of listing in each borough :
-
-  neighbourhood_group_cleansed       price
-0                        Bronx   92.307292
-1                     Brooklyn  128.416249
-2                    Manhattan  208.563722
-3                       Queens  102.608696
-4                Staten Island  109.069832
-
-
-"""
-
-# # plot the Average price of listing in each Borough
-plt.bar(ave_price.neighbourhood_group_cleansed, ave_price.price, edgecolor="#2b2b28")
-plt.xlabel("New York City Borough")
-plt.ylabel("Average Price")
-plt.title("  New York City Airbnb Listing ")
-plt.tight_layout()
-plt.savefig(os.path.join(dir2, "Prices.png"))
-plt.show()
+# """
+# # # plot the room types
+# plt.bar(roomtypes.index, roomtypes.values, edgecolor="#2b2b28")
+# plt.xlabel("Room Type")
+# plt.ylabel("Percentage of Total")
+# plt.title("  New York City Airbnb Listing ")
+# plt.tight_layout()
+# plt.savefig(os.path.join(dir2, "RoomTypes.png"))
+# plt.show()
 
 
 
-# Average price per room type in each Borough
-nprice_room = working_data.groupby(["neighbourhood_group_cleansed", "room_type"], as_index=False, observed=True).agg({'price': 'mean'})
-price_room = nprice_room.pivot(index = 'neighbourhood_group_cleansed',
-                                 columns = "room_type",
-                                 values = "price")
-price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
-plt.xlabel("New York City Borough")
-plt.ylabel("Average Price")
-plt.title("Airbnb Listing in New York")
-plt.tight_layout()
-plt.savefig(os.path.join(dir2, "BoRoomPrice.png"))
-plt.show()
+# # get the counts of room_types per bourough
+# hh = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"], normalize="index", margins = True).fillna(0) * 100
+# hh2 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"],  margins = True).fillna(0)
+# hh3 = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"]).fillna(0) 
+# # print2("room_types per bourough Percentages :", hh, " room_types per bourough Raw counts" , hh2,
+# #         " room_types per bourough Raw counts", hh3 )
 
-print2("Average price per room type in each Borough :", nprice_room, 
-       "Average price per room type in each Borough: Pivot" , price_room )
+# """
 
 
-"""
+# room_types per bourough Percentages :
+
+# room_type                     Entire home/apt  Hotel room  Private room  Shared room
+# neighbourhood_group_cleansed
+# Bronx                               37.847222    0.000000     58.246528     3.906250
+# Brooklyn                            51.015563    0.068583     47.280401     1.635452
+# Manhattan                           60.734949    0.828772     36.340891     2.095387
+# Queens                              41.341194    0.221076     55.563744     2.873987
+# Staten Island                       51.396648    0.000000     47.206704     1.396648
+# All                                 53.653667    0.408181     43.901682     2.036470
+
+#  room_types per bourough Raw counts
+
+# room_type                     Entire home/apt  Hotel room  Private room  Shared room    All
+# neighbourhood_group_cleansed
+# Bronx                                     436           0           671           45   1152
+# Brooklyn                                 9670          13          8962          310  18955
+# Manhattan                               11652         159          6972          402  19185
+# Queens                                   2244          12          3016          156   5428
+# Staten Island                             184           0           169            5    358
+# All                                     24186         184         19790          918  45078
+
+#  room_types per bourough Raw counts
+
+# room_type                     Entire home/apt  Hotel room  Private room  Shared room
+# neighbourhood_group_cleansed
+# Bronx                                     436           0           671           45
+# Brooklyn                                 9670          13          8962          310
+# Manhattan                               11652         159          6972          402
+# Queens                                   2244          12          3016          156
+# Staten Island                             184           0           169            5
 
 
-Average price per room type in each Borough :
+# """
 
-   neighbourhood_group_cleansed        room_type       price
-0                     Manhattan  Entire home/apt  251.344576
-1                     Manhattan     Private room  140.018503
-2                     Manhattan      Shared room  115.079602
-3                     Manhattan       Hotel room  315.452830
-4                      Brooklyn  Entire home/apt  177.941675
-5                      Brooklyn     Private room   76.305735
-6                      Brooklyn      Shared room   87.238710
-7                      Brooklyn       Hotel room  195.230769
-8                        Queens  Entire home/apt  145.081551
-9                        Queens     Private room   71.163462
-10                       Queens      Shared room   96.724359
-11                       Queens       Hotel room  139.916667
-12                Staten Island  Entire home/apt  150.842391
-13                Staten Island     Private room   65.923077
-14                Staten Island      Shared room   30.200000
-15                        Bronx  Entire home/apt  131.529817
-16                        Bronx     Private room   66.782414
-17                        Bronx      Shared room   92.888889
-
-Average price per room type in each Borough: Pivot
-
-room_type                     Entire home/apt  Hotel room  Private room  Shared room
-neighbourhood_group_cleansed
-Bronx                              131.529817         NaN     66.782414    92.888889
-Brooklyn                           177.941675  195.230769     76.305735    87.238710
-Manhattan                          251.344576  315.452830    140.018503   115.079602
-Queens                             145.081551  139.916667     71.163462    96.724359
-Staten Island                      150.842391         NaN     65.923077    30.200000
+# # Plot the distribution of listings room_types within the boroughs
+# hh.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
+# plt.xticks(rotation=0)
+# plt.xlabel("New York City Borough")
+# plt.ylabel("Percent")
+# plt.title("  New York City Airbnb Listing ")
+# plt.tight_layout()
+# plt.savefig(os.path.join(dir2, "BoroughRoomType.png"))
+# plt.show()
 
 
 
-"""
+
+# hht = pd.crosstab(working_data["neighbourhood_group_cleansed"], working_data["room_type"], normalize="all").fillna(0) * 100
+# # Plot the distribution of listings room_types within the boroughs
+# hht.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
+# plt.xticks(rotation=0)
+# plt.xlabel("New York City Borough")
+# plt.ylabel("Percent")
+# plt.title("  New York City Airbnb Listing ")
+# plt.tight_layout()
+# plt.savefig(os.path.join(dir2, "BoroughRoomType2.png"))
+# plt.show()
+
+# # find average price of listing in each borough
+# ave_price = working_data.groupby("neighbourhood_group_cleansed", as_index=False).agg({'price': 'mean'})
+# # print2("average price of listing in each borough :", ave_price)
+
+
+# """
+
+
+# average price of listing in each borough :
+
+#   neighbourhood_group_cleansed       price
+# 0                        Bronx   92.307292
+# 1                     Brooklyn  128.416249
+# 2                    Manhattan  208.563722
+# 3                       Queens  102.608696
+# 4                Staten Island  109.069832
+
+
+# """
+
+# # # plot the Average price of listing in each Borough
+# plt.bar(ave_price.neighbourhood_group_cleansed, ave_price.price, edgecolor="#2b2b28")
+# plt.xlabel("New York City Borough")
+# plt.ylabel("Average Price")
+# plt.title("  New York City Airbnb Listing ")
+# plt.tight_layout()
+# plt.savefig(os.path.join(dir2, "Prices.png"))
+# plt.show()
+
+
+
+# # Average price per room type in each Borough
+# nprice_room = working_data.groupby(["neighbourhood_group_cleansed", "room_type"], as_index=False, observed=True).agg({'price': 'mean'})
+# price_room = nprice_room.pivot(index = 'neighbourhood_group_cleansed',
+#                                  columns = "room_type",
+#                                  values = "price")
+# price_room.plot.bar(rot=0, cmap='tab20c', edgecolor="#2b2b28")
+# plt.xlabel("New York City Borough")
+# plt.ylabel("Average Price")
+# plt.title("Airbnb Listing in New York")
+# plt.tight_layout()
+# plt.savefig(os.path.join(dir2, "BoRoomPrice.png"))
+# plt.show()
+
+# print2("Average price per room type in each Borough :", nprice_room, 
+#        "Average price per room type in each Borough: Pivot" , price_room )
+
+
+# """
+
+
+# Average price per room type in each Borough :
+
+#    neighbourhood_group_cleansed        room_type       price
+# 0                     Manhattan  Entire home/apt  251.344576
+# 1                     Manhattan     Private room  140.018503
+# 2                     Manhattan      Shared room  115.079602
+# 3                     Manhattan       Hotel room  315.452830
+# 4                      Brooklyn  Entire home/apt  177.941675
+# 5                      Brooklyn     Private room   76.305735
+# 6                      Brooklyn      Shared room   87.238710
+# 7                      Brooklyn       Hotel room  195.230769
+# 8                        Queens  Entire home/apt  145.081551
+# 9                        Queens     Private room   71.163462
+# 10                       Queens      Shared room   96.724359
+# 11                       Queens       Hotel room  139.916667
+# 12                Staten Island  Entire home/apt  150.842391
+# 13                Staten Island     Private room   65.923077
+# 14                Staten Island      Shared room   30.200000
+# 15                        Bronx  Entire home/apt  131.529817
+# 16                        Bronx     Private room   66.782414
+# 17                        Bronx      Shared room   92.888889
+
+# Average price per room type in each Borough: Pivot
+
+# room_type                     Entire home/apt  Hotel room  Private room  Shared room
+# neighbourhood_group_cleansed
+# Bronx                              131.529817         NaN     66.782414    92.888889
+# Brooklyn                           177.941675  195.230769     76.305735    87.238710
+# Manhattan                          251.344576  315.452830    140.018503   115.079602
+# Queens                             145.081551  139.916667     71.163462    96.724359
+# Staten Island                      150.842391         NaN     65.923077    30.200000
+
+
+
+# """
 
 
 
@@ -394,17 +410,24 @@ def preanalysis(data1):
     ddate = datetime(2020, 2, 12)
 
     df.loc[:, "date"] = pd.to_datetime(df['host_since'], format='%Y-%m-%d')
-    df.loc[:, "days"] = df["date"].apply(lambda x: (ddate - x).days)
+    df.loc[:, "host_days_on_Airbnb"] = df["date"].apply(lambda x: (ddate - x).days)
+    df.loc[:, "Borough"] = df["neighbourhood_group_cleansed"]
 
     # Drop the datetime columns
-    df.drop(['host_since', 'date', "id", "host_id"], axis=1, inplace=True)
+    df.drop(['host_since', 'date', "id", "host_id", "neighbourhood_group_cleansed"], axis=1, inplace=True)
 
+    # Hot encoding for binary catergory
+    binary_cat = ['host_is_superhost', 'host_has_profile_pic', 'host_identity_verified', 'is_location_exact',
+                    'instant_bookable', 'require_guest_profile_picture', 'require_guest_phone_verification']
+    
+    for col in binary_cat:
+        df[col] = df[col].map({"t": 1, "f": 0}).astype("uint8")
 
 
     # get dummies
-    # dff = pd.get_dummies(df, drop_first=True, prefix_sep="_")
+    dff = pd.get_dummies(df, columns=["Borough", "room_type", "bed_type"], drop_first=True, prefix_sep="_")
 
-    return df
+    return dff
 
 
 
@@ -412,19 +435,20 @@ def dfform(data1):
     v = pd.DataFrame(data1, columns=["coefficients"])
     vv = pd.DataFrame(X_test.columns, columns=["features"])
     df2 = pd.concat([vv, v], axis=1, join="inner")
-    df3 = df2.sort_values(by="coefficients")
+    df3 = df2.sort_values(by="coefficients", ascending=False)
 
     return df3
 
 
 working_data2 = preanalysis(working_data)
-print2(len(working_data2.columns))
+print2("##$$4456666"*10)
+print2(len(working_data2.columns), working_data2.info(), working_data2.head())
 
-working_data2.to_csv(os.path.join(mydir, 'clean.csv'), index=False, compression='gzip')
+# working_data2.to_csv(os.path.join(mydir, 'clean.csv'), index=False, compression='gzip')
 # data = pd.read_csv('textdata.csv', compression='gzip')
 # car = pd.read_csv('car.csv', compression='gzip')
 
-"""
+
 
 for item in cat:
     bb = len(working_data[item].unique())
@@ -451,13 +475,13 @@ print2("price" in list(working_data2.columns))
 
 pl = Pipeline([
             ("scaler", StandardScaler()),
-            # ("dtree", DecisionTreeRegressor())
-            # ("reg1",  LinearRegression())
-            ("reg2", RandomForestRegressor(n_estimators = 100,
-                           n_jobs = -1,
-                           oob_score = True,
-                           bootstrap = True,
-                           random_state = 42))
+            # ("decisionTree", DecisionTreeRegressor())
+            ("reg1",  LinearRegression())
+            # ("radomForest", RandomForestRegressor(n_estimators = 100,
+            #                n_jobs = -1,
+            #                oob_score = True,
+            #                bootstrap = True,
+            #                random_state = 42))
     
         
 ])
@@ -489,20 +513,86 @@ rf = RandomForestRegressor(n_estimators = 100,
 
 
 rf = pl[-1]
-print('R^2 Training Score: {:.2f} \nOOB Score: {:.2f} \nR^2 Validation Score: {:.2f}'.format(rf.score(X_train, y_train), 
-                                                                                             rf.oob_score_,
-                                                                                             rf.score(X_test, y_test)))
+# print('R^2 Training Score: {:.2f} \nOOB Score: {:.2f} \nR^2 Validation Score: {:.2f}'.format(rf.score(X_train, y_train), 
+#                                                                                              rf.oob_score_,
+#                                                                                              rf.score(X_test, y_test)))
 
 
-# plt.bar(X_test.columns, pl[-1].coef_)
+data7 = dfform(pl[-1].coef_)
 
-data7 = dfform(pl[-1].feature_importances_)
+# data7 = dfform(pl[-1].feature_importances_)
 
 plt.barh(data7.features, data7.coefficients)
 plt.xticks(rotation=45)
-# plt.axhline(y=0.0, color='black', linestyle='-')
+plt.axvline(x=20.0, color='red', linestyle='-')
+plt.axvline(x= 0.0, color='black', linestyle='-')
+plt.axvline(x=-10.0, color='red', linestyle='-')
+# plt.tight_layout()
+plt.gcf().subplots_adjust(left=0.15)
+plt.savefig(os.path.join(dir2, "LinearCoeff1.png"))
 plt.show()
 
+
+
+# plt.figure(figsize = (20,38))
+plt.bar(data7.features, data7.coefficients)
+# plt.xticklabels(rotation = 45, ha="right")
+plt.xticks(np.arange(len(data7.features)), rotation = 45, ha="right")
+# plt.xticks(rotation=90)
+plt.axhline(y=0.0, color='black', linestyle='-')
+plt.axhline(y=20.0, color='red', linestyle='-')
+plt.axhline(y=-10.0, color='red', linestyle='-')
+# plt.tight_layout()
+plt.gcf().subplots_adjust(bottom=0.25)
+plt.savefig(os.path.join(dir2, "linearCoeff1.png"))
+plt.show()
+
+
+
+
+
+
+
+pl2 = Pipeline([
+            ("scaler", StandardScaler()),
+            # ("decisionTree", DecisionTreeRegressor())
+            # ("reg1",  LinearRegression())
+            ("radomForest", RandomForestRegressor(n_estimators = 100,
+                           n_jobs = -1,
+                           oob_score = True,
+                           bootstrap = True,
+                           random_state = 42))
+    
+        
+])
+
+pl2.fit(X_train, y_train)
+pred2 = pl2.predict(X_test)
+
+
+
+
+data7 = dfform(pl2[-1].feature_importances_)
+data7.sort_values(by="coefficients", inplace=True)
+plt.barh(data7.features, data7.coefficients)
+plt.xticks(rotation=45)
+plt.axvline(x=0.06, color='red', linestyle='-')
+plt.axvline(x= 0.0, color='black', linestyle='-')
+# plt.axvline(x=-10.0, color='red', linestyle='-')
+plt.gcf().subplots_adjust(left=0.15)
+plt.savefig(os.path.join(dir2, "RomdonForestImportance1.png"))
+plt.show()
+
+
+
+plt.bar(data7.features, data7.coefficients)
+plt.xticks(np.arange(len(data7.features)), rotation = 45, ha="right")
+plt.axhline(y=0.0, color='black', linestyle='-')
+plt.axhline(y=0.06, color='red', linestyle='-')
+# plt.axhline(y=-10.0, color='red', linestyle='-')
+plt.gcf().subplots_adjust(bottom=0.25)
+plt.savefig(os.path.join(dir2, "RomdonForestImportance2.png"))
+plt.show()
 
 
 from sklearn.metrics import r2_score
@@ -513,11 +603,13 @@ def r2(pl, X_train, y_train):
 
 perm_= permutation_importances(pl, X_train, y_train, r2)
 
-pp = pd.DataFrame(perm_.reset_index())
-ppp = pp.sort_values(by="Importance")
+ppp = pd.DataFrame(perm_.reset_index())
+ppp.sort_values(by="Importance", inplace=True)
 plt.barh(ppp.Feature, ppp.Importance)
-plt.xticks(rotation=45)
-# plt.axhline(y=0.0, color='black', linestyle='-')
+plt.axvline(x=0.020, color='red', linestyle='-')
+# plt.axvline(x= 0.0, color='black', linestyle='-')
+plt.gcf().subplots_adjust(left=0.15)
+plt.savefig(os.path.join(dir2, "PermutImportance.png"))
 plt.show()
 
 print2(perm_, ppp.head())
@@ -538,10 +630,71 @@ perm = PermutationImportance(rf, cv = None, refit = False, n_iter = 50).fit(X_tr
 perm_imp_eli5 = dfform(perm.feature_importances_)
 print2(perm_imp_eli5.head(), perm_imp_eli5)
 
+perm_imp_eli5.sort_values(by="coefficients", inplace=True)
+plt.barh(perm_imp_eli5.features, perm_imp_eli5.coefficients)
+plt.axvline(x=0.020, color='red', linestyle='-')
+# plt.axvline(x= 0.0, color='black', linestyle='-')
+plt.savefig(os.path.join(dir2, "eli5Importance.png"))
+plt.gcf().subplots_adjust(left=0.15)
+plt.show()
 
 
 
-"""
+
+from sklearn.ensemble import StackingRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.experimental import enable_hist_gradient_boosting  # noqa
+from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+
+estimatorstack = [
+    ('Random Forest', RandomForestRegressor(random_state=42)),
+    ('Lasso', LassoCV()),
+    ('Gradient Boosting', HistGradientBoostingRegressor(random_state=0))]
+
+stacking_regressor = StackingRegressor(
+    estimators=estimatorstack, final_estimator=RidgeCV())
+
+
+from sklearn.linear_model import LinearRegression, TheilSenRegressor, RANSACRegressor, HuberRegressor
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.pipeline import make_pipeline
+from sklearn.neural_network import MLPRegressor
+
+estimators = [('OLS', LinearRegression()),
+              ('Theil-Sen', TheilSenRegressor(random_state=42)),
+              ('RANSAC', RANSACRegressor(random_state=42)),
+              ('HuberRegressor', HuberRegressor()),
+              ("decisionTree", DecisionTreeRegressor()),
+              ("radomForest", RandomForestRegressor(n_estimators = 100,
+                           n_jobs = -1,
+                           oob_score = True,
+                           bootstrap = True,
+                           random_state = 42)),
+            #   ("multoutput", MultiOutputRegressor(RandomForestRegressor(n_estimators=100,
+            #                                               n_jobs = -1,
+            #                                               random_state=0)))
+            #   
+            ('Stacked Regressors', stacking_regressor),
+            ("MLregs", MLPRegressor(hidden_layer_sizes=(100,100),
+                                    tol=1e-2, max_iter=5000, random_state=0))
+            ]
+
+for name, estimator in estimators:
+  model = make_pipeline(StandardScaler(), estimator)
+  model.fit(X_train, y_train)
+    # mse = mean_squared_error(model.predict(X_test), y_test)
+    # y_plot = model.predict(x_plot[:, np.newaxis])
+  pred = model.predict(X_test)
+  print(name," mean_absolute_error : ", mean_absolute_error(y_test, pred))
+  print(name," mean_squared_error: ", mean_squared_error(y_test, pred))
+  print(name," Root mean_squared_error: ", np.sqrt(mean_squared_error(y_test, pred)))
+  print(name," R_squared : ", model.score(X_test, y_test), end="\n\n")
+
+
+
+
 
 
 
