@@ -14,13 +14,11 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
 * **Required packages and dependencies** 
   
   The analysis is done using `Python 3.8.1`. Packages used are: 
-    - `os`
-    - `numpy.4`
-    - `Pandas 1.0.1`
-    - `pickle`
-    - `regex`
-    - `collections`
-      - `defaultdict`
+  
+    - `numpy`
+    - `Pandas`
+    - `xgboost`
+    - `eli5`
     - `Matlabplot`
     - `Scklearn`
     - `Seaborn`
@@ -49,7 +47,9 @@ Find jupyter notebook [here]()
 
 ## Conclusion
 * Manhattan, Brooklyn and Queens accounted for over 96% of Airbnb listings in New York City. Based on location, Brooklyn is more accessible to Manhattan which is the city center compared to Queens. Initial search for vacation should start with searching listings in Brooklyn and Manhattan.
+
 * Private rooms seem to be the most affordable room type across the boroughs especially in The Bronx ($66), Staten Island ($65) while the prices are $71 in Queens and $76 in Brooklyn.
+
 * Prices of listings on average are higher in Manhattan compared to other Boroughs in New York City. Prices of private rooms is $140 in Manhattan, more than double the price in The Bronx, Staten Island and Queens.
 
 ## Github repository 
