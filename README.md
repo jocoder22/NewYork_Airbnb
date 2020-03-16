@@ -36,7 +36,7 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
     - csv file contained cleaned dataset ready for analysis
  
  ## Analysis questions
- Following the CRISP-DM process this project tend to find solutions to the following questions
+ Following the CRISP-DM process this project will find solutions to the following questions
 
 * Question I
    - Where are the Airbnb rooms in New York City?
