@@ -1,6 +1,6 @@
-'''
+
 ################# Analysis PLan #######################
-            # NewYork_Airbnb
+            NewYork_Airbnb
         Writing a Data Scientist Blog Post
     In patial fulfillment of award of degree
             Data Science Nanodegree
@@ -26,6 +26,4 @@ E. Deployment
 
 
 
-
-'''
 
