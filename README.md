@@ -1,10 +1,7 @@
 # NewYork_Airbnb
 Writing a Data Scientist Blog Post
 
-# Discover New York best secret Airbnb for you
-# Rediscover New York City Airbnb 
-# Undercover best Airbnb in New York
-# Your only New York Airbnb secrets
+# Special New York City Airbnb Rooms Made For You!
 
 ## Introduction
 The project analyzed Airbnb listing in NYC using publicly avaiable Airbnb dataset (12 February, 2020). The project compared rates between the NYC boroughs, and the properties that helps predict price. The analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs. but do following the CRISP-DM process in finding solutions
