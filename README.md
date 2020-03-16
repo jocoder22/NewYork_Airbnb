@@ -52,7 +52,7 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
     - Finding factors that positively and negatively impact the price of Airbnb rooms in NYC using linear regression analysis.
 
 ## Jupyter Notebook
-Find jupyter notebook [here]()
+Find jupyter notebook [here](https://github.com/jocoder22/NewYork_Airbnb/blob/master/analysis.ipynb)
 
 ## Conclusion
 * Manhattan, Brooklyn and Queens accounted for over 96% of Airbnb listings in New York City. Based on location, Brooklyn is more accessible to Manhattan which is the city center compared to Queens. Initial search for vacation should start with searching listings in Brooklyn and Manhattan.
