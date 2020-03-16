@@ -4,11 +4,11 @@ Writing a Data Scientist Blog Post
 # Special New York City Airbnb Rooms Made For You!
 
 ## Introduction
-The project analyzed Airbnb listing in NYC using publicly avaiable Airbnb dataset (12 February, 2020). The project compared rates between the NYC boroughs, and the properties that helps predict price. The analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs. but do following the CRISP-DM process in finding solutions
+The project analyzed Airbnb listing in NYC using publicly avaiable Airbnb dataset (12 February, 2020). The project compared rates between the NYC boroughs, and the properties that helps predict price. The analysis will give insights to the spread and distribution of the Airbnb listings in each NYC boroughs by following the CRISP-DM process.
 
-Using Airbnb data, we hope to gain insights on the distribution and spread of Airbnb listing accross the five borough of NYC. NYC being the most visited city in the world, travellers seeking accomodation in NYC will gain insight on affordable rooms and thier location in NYC.
+Using Airbnb data, we hope to gain insights on the distribution and spread of Airbnb listing accross the five borough of NYC. NYC being the most visited city in the world, travellers seeking accomodation in NYC will gain insight on where to find affordable Airbnb rooms.
 
-* **Required packages and dependencies** 
+* **Required packages** 
   
   The analysis is done using `Python 3.8.1`. 
   
