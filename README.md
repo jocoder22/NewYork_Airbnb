@@ -23,6 +23,10 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
  ## Dataset
  Publicly avaiable [Airbnb NYC dataset](http://insideairbnb.com/get-the-data.html)
  
+ ## GitHub files
+ * analysis_plan.txt
+    - Plain text file that lays out Cross-Industry Standard Process of Data Mining - (CRISP-DM) for this project
+ 
  ## Analysis questions
  Following the CRISP-DM process this project tend to find solutions to the following questions
 
