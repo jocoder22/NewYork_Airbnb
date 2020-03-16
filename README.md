@@ -26,6 +26,12 @@ Using Airbnb data, we hope to gain insights on the distribution and spread of Ai
  ## GitHub files
  * analysis_plan.txt
     - Plain text file that lays out Cross-Industry Standard Process of Data Mining - (CRISP-DM) for this project
+  
+ * analysis.ipynb
+    - Jupyter notebook with python codes used in this project
+    
+ * clean.csv
+    - csv file contained cleaned dataset ready for analysis
  
  ## Analysis questions
  Following the CRISP-DM process this project tend to find solutions to the following questions
