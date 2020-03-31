@@ -373,7 +373,6 @@ plt.tight_layout()
 plt.show()
 
 
-
 # # Average price per room type in each Borough
 nprice_room = cleandata.groupby(["Borough", "room_type"], as_index=False, observed=True).agg({'price': 'mean'})
 price_room = nprice_room.pivot(index = 'Borough', columns = "room_type", values = "price")
@@ -402,7 +401,7 @@ plt.show()
 
 
 # prepare dataset for analysis
-cleandata.info()
+print2(cleandata.info())
 
 
 def preanalysis(datat):
@@ -433,13 +432,11 @@ analysis_data = preanalysis(cleandata)
 print(analysis_data.info(), analysis_data.shape, sep="\n\n")
 
 
-
 # split data for analysis and validation
 analysis_data.dropna()
 target = analysis_data.pop("logprice")
 analysis_data.drop(columns=["price"], inplace=True)
 X_train, X_test, y_train, y_test = train_test_split(analysis_data, target, test_size=0.2)
-
 
 
 # explore the split data
@@ -467,8 +464,8 @@ print("R_squared : ", pl.score(X_test, y_test))
 print("R2_squared : ", r2_score(pred, y_test))
 
 
-# fit and evaluate complex models
 
+# fit and evaluate complex models
 estimatorstack = [
     ('Random Forest', RandomForestRegressor(random_state=342)),
     ('Lasso', LassoCV())
@@ -587,7 +584,6 @@ for name, estimator in estimators2:
 
 
 # Gridsearch for model, and hyperparameter tuning
-
 pipe = Pipeline([
               ("scaler", StandardScaler()),
               ("model", RandomForestRegressor())
@@ -637,9 +633,9 @@ def dfform(lstt):
 
     return df3
 
-features_weight = dfform(pl[-1].feature_importances_)
-features_weight.head()
 
+features_weight = dfform(pl[-1].feature_importances_)
+print2(features_weight.head())
 
 
 # visualize the top 10 important feature affecting prices
@@ -674,4 +670,7 @@ plt.title("Airbnb Listing in New York")
 plt.gcf().subplots_adjust(left=0.15)
 plt.savefig("plot.jpeg")
 plt.show()
+
+
+
 
