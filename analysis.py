@@ -569,7 +569,7 @@ estimators2 = [
     ("RandomForestRegressor", rfr),
     ("LinearRegression", lreg),
     ("VotingRegressor", vreg)
-]
+    ]
 
 for name, estimator in estimators2:
     model = make_pipeline(StandardScaler(), estimator)
@@ -601,14 +601,16 @@ grid_ = [{"model": [XGBRegressor()],
             "model__ccp_alpha":  np.arange(0.0, 0.4, 0.05),
             "model__max_depth": [4, 6],
             "model__n_estimators": [90, 100, 150]
+    }]
 
-}]
 
 gridsearcher = GridSearchCV(estimator=pipe, param_grid=grid_,
                        cv=5, verbose=1, n_jobs=-1)
 
 
+# create grid search
 best_model = gridsearcher.fit(X_train, y_train)
+
 
 # # View best model
 best_model.best_estimator_.get_params()['model']
