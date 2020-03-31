@@ -111,18 +111,16 @@ selected_features = ['id',  'host_id', 'host_since', 'host_is_superhost', 'neigh
             'instant_bookable',  'require_guest_profile_picture', 'require_guest_phone_verification']   
 
 selected = data[selected_features]
-selected.info()
+print2(selected.info())
 
 
 # explore in depth each selected feature
-selected.head(10)
-
-
+print2(selected.head(10))
 
 
 # features with dollar signs
 dollarfeatures = ['security_deposit','cleaning_fee', 'extra_people', 'price']
-selected[dollarfeatures].head()
+print2(selected[dollarfeatures].head())
 
 
 
