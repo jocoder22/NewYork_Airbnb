@@ -130,13 +130,13 @@ object_cat = ['host_is_superhost', 'neighbourhood_group_cleansed',
        'room_type', 'bed_type',  'instant_bookable',
        'require_guest_profile_picture', 'require_guest_phone_verification']
 
-selected[object_cat].head()
+print2(selected[object_cat].head())
 
 
 
 
 # explore other numerical selected features
-selected.select_dtypes(include=["int64", "float64"]).head()
+print2(selected.select_dtypes(include=["int64", "float64"]).head())
 
 
 
@@ -144,7 +144,7 @@ selected.select_dtypes(include=["int64", "float64"]).head()
 # explore object dtype selected features
 # host_since is acutally a datetime dtype
 # confirmed security_deposit,cleaning_fee, extra_people, price are actually numerical dtype with dollar signs
-selected.select_dtypes(include=["object"]).head()
+print2(selected.select_dtypes(include=["object"]).head())
 
 
 # ## C. Data preparation
@@ -211,13 +211,13 @@ dup_list = ['host_id', 'host_since', 'host_is_superhost', 'host_has_profile_pic'
 cleandata = data_cleaner(data, selected_features, dollarfeatures, object_cat, dup_list)
 
 
-cleandata.info()
+print2(cleandata.info())
 
 
 
 
 # explore in depth cleandata
-cleandata.head(10)
+print2(cleandata.head(10))
 
 
 # ## C. Data preparation
@@ -225,10 +225,7 @@ cleandata.head(10)
 
 
 
-cleandata.shape
-
-
-cleandata.describe()
+print2(cleandata.shape, cleandata.describe())
 
 
 # visualise pair wise relationship
