@@ -229,22 +229,20 @@ print2(cleandata.shape, cleandata.describe())
 
 
 # visualise pair wise relationship
-sns.pairplot(cleandata);
+sns.pairplot(cleandata)
 
 
 
 # ecplore pairwise on selected features
 selected_pairwise = ['security_deposit', 'price','cleaning_fee', 'guests_included','availability_90', 'availability_365'] 
 
-sns.pairplot(cleandata[selected_pairwise]);
+sns.pairplot(cleandata[selected_pairwise])
 
 
 # explore correlations among features
 # strong positive correlation between availability_60 and availability_90
 cleandata_correlation = cleandata.corr()
 sns.heatmap(cleandata_correlation,  square=True,cmap="YlGnBu")
-
-
 
 
 # drop avaliability 30days and 60days
@@ -264,8 +262,6 @@ sns.distplot(cleandata.price,rug=True)
 mask = cleandata.price > 0
 cleandata['logprice'] = np.log(cleandata[mask].price).round(4)
 sns.distplot(cleandata['logprice'], hist=False, rug=True)
-
-
 
 
 num_features = ['security_deposit','cleaning_fee', 'extra_people', 'logprice', 'longitude', 'latitude','is_location_exact']
@@ -300,13 +296,10 @@ plt.tight_layout()
 plt.show()
 
 
-
 # # get the room types percentages
 roomtypes = cleandata["room_type"].value_counts(normalize=True) * 100
 roomtypes2 = cleandata["room_type"].value_counts()
 print("\n\n\n\nRoomtypes Percentages :", roomtypes, "\n\n\n\nRaw counts" , roomtypes2 , sep="\n")
-
-
 
 
 # # # plot the room types
@@ -316,9 +309,6 @@ plt.ylabel("Percentage of Total")
 plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
 plt.show()
-
-
-
 
 
 
@@ -349,7 +339,6 @@ plt.show()
 
 
 
-
 # # Plot the distribution of listings room_types across the boroughs
 hht.plot.bar(stacked=True, cmap='tab20c', figsize=(10,7), edgecolor="#2b2b28")
 plt.xticks(rotation=0)
@@ -358,8 +347,6 @@ plt.ylabel("Percent")
 plt.title("  New York City Airbnb Listing ")
 plt.tight_layout()
 plt.show()
-
-
 
 
 
@@ -375,8 +362,6 @@ plt.show()
 # # find average price of listing in each borough
 ave_price = cleandata.groupby("Borough", as_index=False).agg({'price': 'mean'})
 print("average price of listing in each borough :", ave_price, sep="\n")
-
-
 
 
 # # # plot the Average price of listing in each Borough
